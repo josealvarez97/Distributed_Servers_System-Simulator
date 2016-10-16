@@ -1,6 +1,8 @@
 # Servers_System_Simulator
 This project is about simulating a distributed servers system. The idea behind this systems is to attend as many requests as quickly as possible with the available computational resources.
 
+References:
+
 1. [Doubly Linked Lists. Concept and Examples](http://es.ccm.net/faq/2872-listas-doblemente-enlazadas)
 2. [How to make a doubly linked list in c++ p.1 (video)](https://www.youtube.com/watch?v=YJRRpXYldVQ)
 3. [How to make a doubly linked list in c++ p.2 (video)](https://www.youtube.com/watch?v=5s0x8bc9DvQ)
