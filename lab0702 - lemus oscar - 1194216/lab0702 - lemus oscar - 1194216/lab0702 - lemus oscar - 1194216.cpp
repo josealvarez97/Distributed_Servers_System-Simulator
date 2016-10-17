@@ -10,7 +10,7 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	DoubleLinkedList *l = new DoubleLinkedList();
 	
-	l->Add(1);
+	/*l->Add(1);
 	l->Add(3);
 	l->Add(5);
 	std::cout << (l->FirstElement()) << "\n";
@@ -25,7 +25,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	l->RemoveHead();
 	l->RemoveTail();
 	l->RemoveNodeIn(3);
-	std::cin.get();
+	std::cin.get();*/
 	return 0;
 }
 
