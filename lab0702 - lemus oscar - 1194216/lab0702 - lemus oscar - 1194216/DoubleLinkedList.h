@@ -15,8 +15,8 @@ public:
 	int ItemAtIndex(int index);
 	bool InsertBeforeOf(int number, int position);
 private:
-	DNode *head;
-	DNode *tail;
+	CNode *head;
+	CNode *tail;
 	int counter;
 public:
 	bool InsertAfterOf(int number, int position);

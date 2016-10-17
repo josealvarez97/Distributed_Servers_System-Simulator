@@ -34,7 +34,7 @@ bool DoubleLinkedList::Add(int number)
 {
 	if (this->head)
 	{
-		DNode  *n = new DNode(number);
+		CNode  *n = new CNode(number);
 		n->setPrevious(this->tail);
 		this->tail->setNext(n); 
 		this->tail = n;
@@ -44,7 +44,7 @@ bool DoubleLinkedList::Add(int number)
 	}
 	else
 	{
-		DNode  *n = new DNode(number);
+		CNode  *n = new CNode(number);
 		this->head = n;
 		this->tail = n;
 		counter++;
@@ -58,7 +58,7 @@ bool DoubleLinkedList::InsertFirst(int number)
 {
 	if (this->head)
 	{
-		DNode * n = new DNode(number);
+		CNode * n = new CNode(number);
 		this->head->setPrevious(n);
 		n->setNext(this->head);
 		this->head = n;
@@ -66,7 +66,7 @@ bool DoubleLinkedList::InsertFirst(int number)
 	}
 	else
 	{
-		DNode *n = new DNode(number);
+		CNode *n = new CNode(number);
 		this->head = n;
 		this->tail = n;
 		counter++;
@@ -110,7 +110,7 @@ bool DoubleLinkedList::RemoveHead()
 {
 	if (counter > 0)
 	{
-		DNode * Temp = new DNode();
+		CNode * Temp = new CNode();
 		Temp = this->head;
 
 		this->head = Temp->getNext();
@@ -128,7 +128,7 @@ bool DoubleLinkedList::RemoveHead()
 int DoubleLinkedList::ItemAtIndex(int index)
 {
 	int position = 0;
-	DNode *Temp = new DNode();
+	CNode *Temp = new CNode();
 	Temp = this->head;
 
 	while (position != index)
@@ -147,8 +147,8 @@ bool DoubleLinkedList::InsertBeforeOf(int number, int position)
 	if (counter >  0)
 	{
 		int temporary = 0;
-		DNode *Temp1 = new DNode();
-		DNode *Temp = new DNode(number);
+		CNode *Temp1 = new CNode();
+		CNode *Temp = new CNode(number);
 
 		Temp1 = this->head;
 
@@ -174,8 +174,8 @@ bool DoubleLinkedList::InsertAfterOf(int number, int position)
 	if (counter > 0)
 	{
 		int temporary = 0;
-		DNode * Temp1 = new DNode();
-		DNode * Temp = new DNode(number);
+		CNode * Temp1 = new CNode();
+		CNode * Temp = new CNode(number);
 		
 		Temp1 = this->head;
 
@@ -202,7 +202,7 @@ int DoubleLinkedList::IndexOf(int value)
 	if (counter > 0)
 	{
 		int temporary = 0;
-		DNode * Temp = new DNode();
+		CNode * Temp = new CNode();
 
 		Temp = this->head;
 
@@ -221,7 +221,7 @@ bool DoubleLinkedList::RemoveTail()
 {
 	if (counter > 0)
 	{
-		DNode * Temp = new DNode();
+		CNode * Temp = new CNode();
 		Temp = this->tail;
 
 		this -> tail = Temp->getPrevious();
@@ -237,7 +237,7 @@ bool DoubleLinkedList::RemoveNodeIn(int position)
 	if (counter > 0)
 	{
 		int temporary = 0;
-		DNode * Temp1 = new DNode();
+		CNode * Temp1 = new CNode();
 		Temp1 = this->head;
 
 		while (temporary != position)

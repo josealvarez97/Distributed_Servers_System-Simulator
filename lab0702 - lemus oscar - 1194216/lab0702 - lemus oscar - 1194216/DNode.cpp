@@ -2,53 +2,53 @@
 #include "DNode.h"
 
 
-DNode::DNode()
+CNode::CNode()
 {
 	this->previous = nullptr;
 	this->value = 0;
 	this->next = nullptr;
 }
 
-DNode::DNode(int number)
+CNode::CNode(int number)
 {
 	this->previous = nullptr;
 	this->value = number;
 	this->next = nullptr;
 }
 
-void DNode::setValue(int number)
+void CNode::setValue(int number)
 {
 	this->value = number;
 }
 
-void DNode::setPrevious(DNode *p)
+void CNode::setPrevious(CNode *p)
 {
 	this->previous = p;
 }
 
-void DNode::setNext(DNode *p)
+void CNode::setNext(CNode *p)
 {
 	this->next = p;
 }
 
-DNode * DNode::getPrevious()
+CNode * CNode::getPrevious()
 {
 	return this->previous;
 }
 
-DNode *DNode::getNext()
+CNode *CNode::getNext()
 {
 	return this->next;
 
 }
 
 
-DNode::~DNode()
+CNode::~CNode()
 {
 }
 
 
-int DNode::getValue()
+int CNode::getValue()
 {
 	return this->value;
 }

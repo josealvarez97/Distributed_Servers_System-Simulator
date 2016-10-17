@@ -1,21 +1,21 @@
 #pragma once
-class DNode
+class CNode
 {
 public:
-	DNode();
-	DNode(int number);
-	~DNode();
+	CNode();
+	CNode(int number);
+	~CNode();
 
 	void setValue(int number);
-	void setPrevious(DNode *p);
-	void setNext(DNode *p);
-	DNode *getPrevious();
-	DNode *getNext();
+	void setPrevious(CNode *p);
+	void setNext(CNode *p);
+	CNode *getPrevious();
+	CNode *getNext();
 
 private:
-	DNode * previous;
+	CNode * previous;
 	int value;
-	DNode * next;
+	CNode * next;
 public:
 	int getValue();
 };
