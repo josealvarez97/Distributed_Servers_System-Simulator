@@ -115,6 +115,7 @@ bool DoubleLinkedList::RemoveHead()
 
 		this->head = Temp->getNext();
 		this->head->setPrevious(nullptr);
+		c--;
 		return true;
 	}
 	return false;
@@ -162,6 +163,7 @@ bool DoubleLinkedList::InsertBeforeOf(int number, int position)
 		Temp1->getPrevious()->setNext(Temp); // Al previous del nodo temporal1 le setea de next el nuevo nodo.
 		Temp->setNext(Temp1); // Al nodo que se desea agregar se le setea de next el temporal1
 		Temp1->setPrevious(Temp); // Setea el previous del nodo temporal1 al nodo que se desea agregar.
+		c++;
 	}
 	return false;
 }
@@ -187,6 +189,7 @@ bool DoubleLinkedList::InsertAfterOf(int number, int position)
 		Temp->setNext(Temp1->getNext()); // Setea el next del nuevo nodo a lo que sea que apuntara el next del temporal1
 		Temp1->getNext()->setPrevious(Temp); // Setea el previous del nodo siguiente a temporal1 a el nuevo nodo
 		Temp1->setNext(Temp); //Setea el next del nodo temporal1 al nuevo nodo
+		c++;
 	}
 	return false;
 }
@@ -223,7 +226,7 @@ bool DoubleLinkedList::RemoveTail()
 
 		this -> tail = Temp->getPrevious();
 		this->tail->setNext(nullptr);
-
+		c--;
 	}
 	return false;
 }
@@ -245,7 +248,7 @@ bool DoubleLinkedList::RemoveNodeIn(int position)
 
 		Temp1->getPrevious()->setNext(Temp1->getNext()); // Al previous (nodo anterior) del temporal1 le setea de next el next del temporal1
 		Temp1->getNext()->setPrevious(Temp1->getPrevious()); // Al next (nodo siguiente) del temporal1 se le asigna de previous el previous del temporal1
-
+		c--;
 	}
 	return false;
 }
