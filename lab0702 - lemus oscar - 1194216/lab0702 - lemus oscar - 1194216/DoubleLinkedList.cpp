@@ -7,7 +7,7 @@ DoubleLinkedList::DoubleLinkedList()
 {
 	this->head = nullptr;
 	this->tail = nullptr;
-	c = 0;
+	counter = 0; // let's use complete names for variables for easier understanding between each other... (counter) att. Jose
 }
 
 
@@ -38,7 +38,7 @@ bool DoubleLinkedList::Add(int number)
 		n->setPrevious(this->tail);
 		this->tail->setNext(n); 
 		this->tail = n;
-		c++;
+		counter++;
 		//agregar al final
 
 	}
@@ -47,7 +47,7 @@ bool DoubleLinkedList::Add(int number)
 		DNode  *n = new DNode(number);
 		this->head = n;
 		this->tail = n;
-		c++;
+		counter++;
 		//agregar al inicio
 	}
 	return false;
@@ -62,14 +62,14 @@ bool DoubleLinkedList::InsertFirst(int number)
 		this->head->setPrevious(n);
 		n->setNext(this->head);
 		this->head = n;
-		c++;
+		counter++;
 	}
 	else
 	{
 		DNode *n = new DNode(number);
 		this->head = n;
 		this->tail = n;
-		c++;
+		counter++;
 	}
 	return false;
 }
@@ -77,7 +77,7 @@ bool DoubleLinkedList::InsertFirst(int number)
 /// This method returns the value of the first element in the list.
 int DoubleLinkedList::FirstElement()
 {
-	if (c > 0)
+	if (counter > 0)
 	{
 		return this->head->getValue();
 	}
@@ -86,15 +86,15 @@ int DoubleLinkedList::FirstElement()
 }
 
 /// This method returns the size of the list
-int DoubleLinkedList::size()
+int DoubleLinkedList::Size()
 {
-	return c;
+	return counter;
 }
 
 //Returns the value of the last element of the list
 int DoubleLinkedList::LastElement()
 {
-	if (c > 0)
+	if (counter > 0)
 	{
 		return this->tail->getValue();
 	}
@@ -108,7 +108,7 @@ int DoubleLinkedList::LastElement()
 // This method removes the first element of the list
 bool DoubleLinkedList::RemoveHead()
 {
-	if (c > 0)
+	if (counter > 0)
 	{
 		DNode * Temp = new DNode();
 		Temp = this->head;
@@ -144,7 +144,7 @@ int DoubleLinkedList::ItemAtIndex(int index)
 
 bool DoubleLinkedList::InsertBeforeOf(int number, int position)
 {
-	if (c >  0)
+	if (counter >  0)
 	{
 		int temporary = 0;
 		DNode *Temp1 = new DNode();
@@ -171,7 +171,7 @@ bool DoubleLinkedList::InsertBeforeOf(int number, int position)
 
 bool DoubleLinkedList::InsertAfterOf(int number, int position)
 {
-	if (c > 0)
+	if (counter > 0)
 	{
 		int temporary = 0;
 		DNode * Temp1 = new DNode();
@@ -199,7 +199,7 @@ bool DoubleLinkedList::InsertAfterOf(int number, int position)
 // Returns the position of a specific value in the list
 int DoubleLinkedList::IndexOf(int value)
 {
-	if (c > 0)
+	if (counter > 0)
 	{
 		int temporary = 0;
 		DNode * Temp = new DNode();
@@ -219,7 +219,7 @@ int DoubleLinkedList::IndexOf(int value)
 
 bool DoubleLinkedList::RemoveTail()
 {
-	if (c > 0)
+	if (counter > 0)
 	{
 		DNode * Temp = new DNode();
 		Temp = this->tail;
@@ -234,7 +234,7 @@ bool DoubleLinkedList::RemoveTail()
 
 bool DoubleLinkedList::RemoveNodeIn(int position)
 {
-	if (c > 0)
+	if (counter > 0)
 	{
 		int temporary = 0;
 		DNode * Temp1 = new DNode();
