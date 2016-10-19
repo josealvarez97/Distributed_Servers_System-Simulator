@@ -116,6 +116,7 @@ bool DoubleLinkedList::RemoveHead()
 		this->head = Temp->getNext();
 		this->head->setPrevious(nullptr);
 		counter--;
+		delete Temp; // Lo eliminamos para que no ocupe espacio en memoria
 		return true;
 	}
 	return false;
@@ -226,6 +227,7 @@ bool DoubleLinkedList::RemoveTail()
 
 		this -> tail = Temp->getPrevious();
 		this->tail->setNext(nullptr);
+		delete Temp; // Lo eliminamos para que no ocupe espacio en memoria
 		counter--;
 	}
 	return false;
@@ -248,6 +250,7 @@ bool DoubleLinkedList::RemoveNodeIn(int position)
 
 		Temp1->getPrevious()->setNext(Temp1->getNext()); // Al previous (nodo anterior) del temporal1 le setea de next el next del temporal1
 		Temp1->getNext()->setPrevious(Temp1->getPrevious()); // Al next (nodo siguiente) del temporal1 se le asigna de previous el previous del temporal1
+		delete Temp1; // Lo eliminamos para que no ocupe un espacio en memoria, porque ya no lo necesitamos.
 		counter--;
 	}
 	return false;
