@@ -82,6 +82,7 @@
     <ClInclude Include="DNode.h" />
     <ClInclude Include="DoubleLinkedList.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Stack.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -89,6 +90,7 @@
     <ClCompile Include="DNode.cpp" />
     <ClCompile Include="DoubleLinkedList.cpp" />
     <ClCompile Include="lab0702 - lemus oscar - 1194216.cpp" />
+    <ClCompile Include="Stack.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
