@@ -8,11 +8,11 @@ using namespace std;
 class ReadFile
 {
 public:
-	ReadFile(string Entrada);
+	ReadFile();
 	~ReadFile();
 private: 
 	ifstream file;
 public:
-	void ReadInput();
+	void ReadInput(string Entrada);
 };
 
