@@ -12,5 +12,7 @@ public:
 	~ReadFile();
 private: 
 	ifstream file;
+public:
+	void ReadInput();
 };
 
