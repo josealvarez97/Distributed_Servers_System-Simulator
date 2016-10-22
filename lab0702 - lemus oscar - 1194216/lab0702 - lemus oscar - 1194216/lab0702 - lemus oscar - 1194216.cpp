@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "DoubleLinkedList.h"
 #include "iostream"
-
+#include "Request.h"
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -26,6 +26,17 @@ int _tmain(int argc, _TCHAR* argv[])
 	l->RemoveTail();
 	l->RemoveNodeIn(3);
 	std::cin.get();
+
+	CRequest* aRequest = new CRequest();
+	aRequest->SetTypeOfOperation(MUL);
+	aRequest->SetRamNumbers("1456854");
+	aRequest->SetProcessingNumbers("1242452");
+	int a = 0;
+	aRequest->SetIdentifier(a);
+	// o con char
+	char b = 1;
+	aRequest->SetIdentifier(b);
+
 	return 0;
 }
 
