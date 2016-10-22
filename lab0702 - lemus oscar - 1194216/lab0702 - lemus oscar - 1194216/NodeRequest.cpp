@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "NodeRequest.h"
-#include "Request.h"
 
 
 CNodeRequest::CNodeRequest()

@@ -32,7 +32,7 @@ bool CRequestQueue::Queue(CRequest Request)
 {
 	if (this->head)
 	{
-		CNodeRequest  *n = new CNodeRequest(Request);
+		CNodeRequest *n = new CNodeRequest(Request);
 		n->setPrevious(this->tail);
 		this->tail->setNext(n);
 		this->tail = n;
