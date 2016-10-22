@@ -2,9 +2,9 @@
 #include "ReadFile.h"
 
 
-ReadFile::ReadFile(string Entrada)
+ReadFile::ReadFile()
 {
-	file.open(Entrada);
+	
 
 }
 
@@ -14,7 +14,19 @@ ReadFile::~ReadFile()
 }
 
 
-void ReadFile::ReadInput()
+void ReadFile::ReadInput(string Entrada)
 {
+	file.open(Entrada);
+	string p = "";
+	
 
+
+	while (!file.eof())
+	{
+		
+		(getline(file, p));
+		cout << p << "\n";
+		
+	}
+	file.close();
 }
