@@ -1,4 +1,6 @@
 #pragma once
+#include "Request.h"
+
 class CNodeRequest
 {
 public:
