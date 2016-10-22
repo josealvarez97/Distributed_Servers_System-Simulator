@@ -11,12 +11,13 @@ public:
 	void setNext(CNode *p);
 	CNode *getPrevious();
 	CNode *getNext();
+	int getValue();
 
 private:
 	CNode * previous;
 	int value;
 	CNode * next;
-public:
-	int getValue();
+
+
 };
 
