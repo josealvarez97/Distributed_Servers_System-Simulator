@@ -12,3 +12,9 @@ ReadFile::ReadFile(string Entrada)
 ReadFile::~ReadFile()
 {
 }
+
+
+void ReadFile::ReadInput()
+{
+
+}

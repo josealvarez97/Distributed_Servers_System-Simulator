@@ -81,8 +81,10 @@
   <ItemGroup>
     <ClInclude Include="DNode.h" />
     <ClInclude Include="DoubleLinkedList.h" />
+    <ClInclude Include="NodeRequest.h" />
     <ClInclude Include="ReadFile.h" />
     <ClInclude Include="Request.h" />
+    <ClInclude Include="RequestQueue.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="stdafx.h" />
@@ -92,8 +94,10 @@
     <ClCompile Include="DNode.cpp" />
     <ClCompile Include="DoubleLinkedList.cpp" />
     <ClCompile Include="lab0702 - lemus oscar - 1194216.cpp" />
+    <ClCompile Include="NodeRequest.cpp" />
     <ClCompile Include="ReadFile.cpp" />
     <ClCompile Include="Request.cpp" />
+    <ClCompile Include="RequestQueue.cpp" />
     <ClCompile Include="Stack.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
