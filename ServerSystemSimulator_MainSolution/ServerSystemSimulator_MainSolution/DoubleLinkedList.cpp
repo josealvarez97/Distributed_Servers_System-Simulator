@@ -31,24 +31,29 @@ DoubleLinkedList::~DoubleLinkedList()
 
 bool DoubleLinkedList::Add(int number)
 {
-	if (this->head)
+	if (counter <= MAX_SIZE || MAX_SIZE != -1)
 	{
-		CNode  *n = new CNode(number);
-		n->setPrevious(this->tail);
-		this->tail->setNext(n); 
-		this->tail = n;
-		counter++;
-		//agregar al final
+		if (this->head)
+		{
+			CNode  *n = new CNode(number);
+			n->setPrevious(this->tail);
+			this->tail->setNext(n);
+			this->tail = n;
+			counter++;
+			//agregar al final
 
+		}
+		else
+		{
+			CNode  *n = new CNode(number);
+			this->head = n;
+			this->tail = n;
+			counter++;
+			//agregar al inicio
+		}
+		return true;
 	}
-	else
-	{
-		CNode  *n = new CNode(number);
-		this->head = n;
-		this->tail = n;
-		counter++;
-		//agregar al inicio
-	}
+
 	return false;
 }
 
@@ -168,6 +173,11 @@ bool DoubleLinkedList::InsertBeforeOf(int number, int position)
 	return false;
 }
 
+void DoubleLinkedList::SetMAX_SIZE(int maxSize)
+{
+	this->MAX_SIZE = maxSize;
+}
+
 
 bool DoubleLinkedList::InsertAfterOf(int number, int position)
 {
@@ -253,4 +263,9 @@ bool DoubleLinkedList::RemoveNodeIn(int position)
 		counter--;
 	}
 	return false;
+}
+
+int DoubleLinkedList::GetMAX_SIZE()
+{
+	return this->MAX_SIZE;
 }
