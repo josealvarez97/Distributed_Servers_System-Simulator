@@ -1,5 +1,15 @@
-﻿  ReadFile.cpp
+﻿  Stack.cpp
+  Server.cpp
+  RequestStack.cpp
+  RequestQueue.cpp
+  Request.cpp
+  ReadFile.cpp
+  NodeRequest.cpp
   Main.cpp
-  Generando código...
-  ServerSystemSimulator_MainSolution.vcxproj -> C:\Users\Oscar\Desktop\Proyecto Servidores\ServerSystemSimulator_MainSolution\Debug\ServerSystemSimulator_MainSolution.exe
-  ServerSystemSimulator_MainSolution.vcxproj -> C:\Users\Oscar\Desktop\Proyecto Servidores\ServerSystemSimulator_MainSolution\Debug\ServerSystemSimulator_MainSolution.pdb (Partial PDB)
+  DoubleLinkedQueue.cpp
+  DoubleLinkedList.cpp
+  DNode.cpp
+  Generating Code...
+c:\users\jjaa0\documents\github\servers_system_simulator\serversystemsimulator_mainsolution\serversystemsimulator_mainsolution\requestqueue.cpp(70): warning C4172: returning address of local variable or temporary
+  ServerSystemSimulator_MainSolution.vcxproj -> C:\Users\jjaa0\Documents\GitHub\Servers_System_Simulator\ServerSystemSimulator_MainSolution\Debug\ServerSystemSimulator_MainSolution.exe
+  ServerSystemSimulator_MainSolution.vcxproj -> C:\Users\jjaa0\Documents\GitHub\Servers_System_Simulator\ServerSystemSimulator_MainSolution\Debug\ServerSystemSimulator_MainSolution.pdb (Partial PDB)

@@ -14,14 +14,17 @@ public:
 	bool RemoveHead();
 	int ItemAtIndex(int index);
 	bool InsertBeforeOf(int number, int position);
+	void SetMAX_SIZE(int maxSize);
 private:
 	CNode *head;
 	CNode *tail;
 	int counter;
+	int MAX_SIZE = -1;
 public:
 	bool InsertAfterOf(int number, int position);
 	int IndexOf(int value);
 	bool RemoveTail();
 	bool RemoveNodeIn(int position);
+	int GetMAX_SIZE();
 };
 
