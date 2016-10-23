@@ -7,7 +7,7 @@ This project is about simulating a distributed servers system. The idea behind t
 - Consuming an element from the **Processing Queue**.
 - Pushing a request to the **Succesful Requests Queue**.
 - Reorganize / Reordering the **RAM**.
-- Executing a **Complete Request** (example making everything neccesary to sum SUM, multiply in MUL, divide in DIV)
+- Executing a **Complete Request** (example, making everything neccesary to sum SUM, multiply in MUL, divide in DIV)
 
 
 References:
