@@ -7,7 +7,9 @@
 - int OperationsPerTick
 
 ### Methods
-- Work(): This methods does as many operations per tick as possible.
+- void Work(): This methods does as many operations per tick as possible.
+- bool AskAvailability(int processingSpaceNecessary, int ramSpaceNecessary): This function receives the parameters
+  of a request and return if it is possible for the server to attend the request.
 
 ## LoadBalancer
 ### Atributtes
