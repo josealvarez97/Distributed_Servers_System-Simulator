@@ -1,6 +1,15 @@
 # Servers System Simulator
 This project is about simulating a distributed servers system. The idea behind this systems is to attend as many requests as quickly as possible with the available computational resources.
 
+
+## What is considered **ONE** operation?
+- Every rotation of **Hard Disc**. (rotating from 1 to 4 or any other number is an operation)
+- Consuming an element from the **Processing Queue**.
+- Pushing a request to the **Succesful Requests Queue**.
+- Reorganize / Reordering the **RAM**.
+- Executing a **Complete Request** (example making everything neccesary to sum SUM, multiply in MUL, divide in DIV)
+
+
 References:
 
 1. [Doubly Linked Lists. Concept and Examples](http://es.ccm.net/faq/2872-listas-doblemente-enlazadas)
