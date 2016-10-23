@@ -11,7 +11,7 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	DoubleLinkedList *l = new DoubleLinkedList();
 	ReadFile * n = new ReadFile();
-	n->ReadInput("C:/Users/Oscar/Desktop/Proyecto Servidores/lab0702 - lemus oscar - 1194216/Entrada.txt");
+	n->ReadInput("..\\..\\..\\..\\..\\..\\Entrada.txt");
 
 	std::cin.get();
 
