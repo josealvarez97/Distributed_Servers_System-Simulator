@@ -24,7 +24,7 @@ int main()
 
 	//Leer entrada y Meter Requests en CR
 	CReadFile* objReadFile = new CReadFile();
-	objReadFile->ReadInput("C:/Users/Oscar/Desktop/Proyecto Servidores/ServerSystemSimulator_MainSolution/ServerSystemSimulator_MainSolution/Entrada.txt", ServersProcessingInfo, ServersRamInfo, ServersOperationsPerTickInfo, requestsQueue);
+	objReadFile->ReadInput("C:/Users/jjaa0/Documents/GitHub/Servers_System_Simulator/ServerSystemSimulator_MainSolution/ServerSystemSimulator_MainSolution/Entrada.txt", ServersProcessingInfo, ServersRamInfo, ServersOperationsPerTickInfo, requestsQueue);
 	
 
 	//Inicializar Objetos

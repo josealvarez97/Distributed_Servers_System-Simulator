@@ -2,6 +2,8 @@
 #include "DoubleLinkedList.h"
 #include "DoubleLinkedQueue.h"
 #include "RequestStack.h"
+#include "RequestQueue.h"
+#include "Request.h"
 using namespace std;
 class CServer
 {
@@ -10,6 +12,8 @@ private: //Attributes
 	DoubleLinkedList serverRAM;
 	int operationsPerTick;
 	CRequestStack* sucessfullRequestsStack;
+	CRequestQueue serverRequestsQueue;
+
 private: //Methods
 	int RamFreeSpace();
 	int ProcessingQueueFreeSpace();
@@ -20,6 +24,7 @@ public:
 
 	void Work();
 	bool AskAvailability(int processingSpaceNecessary, int ramSpaceNecessary);
+	void ReceiveRequest(CRequest* request);
 
 
 };

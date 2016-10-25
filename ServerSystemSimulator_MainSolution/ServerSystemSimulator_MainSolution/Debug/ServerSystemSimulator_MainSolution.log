@@ -1,5 +1,7 @@
 ﻿  Stack.cpp
   Server.cpp
+c:\users\jjaa0\documents\github\servers_system_simulator\serversystemsimulator_mainsolution\serversystemsimulator_mainsolution\server.cpp(55): warning C4018: '<': signed/unsigned mismatch
+c:\users\jjaa0\documents\github\servers_system_simulator\serversystemsimulator_mainsolution\serversystemsimulator_mainsolution\server.cpp(58): warning C4018: '<': signed/unsigned mismatch
   RequestStack.cpp
   RequestQueue.cpp
   Request.cpp

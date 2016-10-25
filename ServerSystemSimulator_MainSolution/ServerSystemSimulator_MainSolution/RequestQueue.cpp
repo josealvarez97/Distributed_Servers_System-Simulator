@@ -27,11 +27,11 @@ CRequestQueue::~CRequestQueue()
 	delete this->tail;
 }
 
-bool CRequestQueue::Queue(CRequest Request)
+bool CRequestQueue::Queue(CRequest* Request)
 {
 	if (this->head)
 	{
-		CNodeRequest *n = new CNodeRequest(Request);
+		CNodeRequest *n = new CNodeRequest(*Request);
 		n->setPrevious(this->tail);
 		this->tail->setNext(n);
 		this->tail = n;
@@ -41,7 +41,7 @@ bool CRequestQueue::Queue(CRequest Request)
 	}
 	else
 	{
-		CNodeRequest  *n = new CNodeRequest(Request);
+		CNodeRequest  *n = new CNodeRequest(*Request);
 		this->head = n;
 		this->tail = n;
 		counter++;
@@ -74,3 +74,16 @@ CRequest * CRequestQueue::Dequeue()
 		return nullptr;
 	}
 }
+
+
+//CRequest* CRequestQueue::ReturnHead()
+//{
+//	/*if (Size() > 0)
+//	{
+//		C* Temp;
+//		Temp = this->head;
+//
+//		return Temp;
+//	}*/
+//
+//}
