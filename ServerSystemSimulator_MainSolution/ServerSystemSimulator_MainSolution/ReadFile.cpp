@@ -108,7 +108,7 @@ void CReadFile::ReadInput(string Entrada, int ServersProccessingInfo[3], int Ser
 
 			// Queue newRequest to RequestQueue
 
-			requestQueue->Queue(newRequest);
+			requestQueue->Queue(&newRequest);
 			//delete newRequest; no se elimina porque al no ser un puntero, automaticamente al salir de este metodo se llama al destructor de la clase
 		}
 

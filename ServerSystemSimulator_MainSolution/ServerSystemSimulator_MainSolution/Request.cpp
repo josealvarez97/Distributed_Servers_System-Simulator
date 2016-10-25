@@ -3,6 +3,7 @@
 
 CRequest::CRequest()
 {
+	this->completed = false;
 }
 
 
@@ -18,11 +19,13 @@ void CRequest::SetTypeOfOperation(typeOfOperation Type)
 void CRequest::SetProcessingNumbers(string numbers)
 {
 	this->processingQueueNumbers = numbers;
+	this->numberOfProcessingSpacesNeeded = numbers.length();
 }
 
 void CRequest::SetRamNumbers(string numbers)
 {
 	this->ramNumbers = numbers;
+	this->numberOfRamSpacesNeeded = numbers.length();
 }
 
 int CRequest::GetTypeOfOperation()

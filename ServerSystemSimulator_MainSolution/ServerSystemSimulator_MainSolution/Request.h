@@ -7,8 +7,12 @@ class CRequest
 private:
 	typeOfOperation operationType;
 	string processingQueueNumbers;
+	int numberOfProcessingSpacesNeeded;
 	string ramNumbers;
+	int numberOfRamSpacesNeeded;
 	char requestIdentifier;
+	bool completed;
+	int result;
 public:
 	CRequest();
 	~CRequest();
