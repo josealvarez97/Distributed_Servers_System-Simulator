@@ -19,10 +19,14 @@ public:
 	void SetTypeOfOperation(typeOfOperation Type);
 	void SetProcessingNumbers(string numbers);
 	void SetRamNumbers(string numbers);
-	int GetTypeOfOperation();
+	typeOfOperation GetTypeOfOperation();
 	string GetProcessingNumbers();
 	string GetRamNumbers();
 	void SetIdentifier(char identifier);
 	char GetIdentifier();
+	bool IsComplete();
+	int GetResult();
+	void SetResult(int number);
+	void SetComplete(bool value);
 };
 

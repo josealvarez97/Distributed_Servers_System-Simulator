@@ -28,7 +28,7 @@ void CRequest::SetRamNumbers(string numbers)
 	this->numberOfRamSpacesNeeded = numbers.length();
 }
 
-int CRequest::GetTypeOfOperation()
+typeOfOperation CRequest::GetTypeOfOperation()
 {
 	return operationType;
 }
@@ -52,3 +52,24 @@ char CRequest::GetIdentifier()
 {
 	return this->requestIdentifier;
 }
+
+bool CRequest::IsComplete()
+{
+	return this->completed;
+}
+
+int CRequest::GetResult()
+{
+	return this->result;
+}
+
+void CRequest::SetResult(int number)
+{
+	this->result = number;
+}
+
+void CRequest::SetComplete(bool value)
+{
+	this->completed = value;
+}
+

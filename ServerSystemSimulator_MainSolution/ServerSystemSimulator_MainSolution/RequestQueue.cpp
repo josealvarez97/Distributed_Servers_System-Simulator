@@ -76,25 +76,15 @@ CRequest * CRequestQueue::Dequeue()
 }
 
 
-CNodeRequest* CRequestQueue::ReturnHead()
+CRequest CRequestQueue::ReturnHead()
 {
 	if (Size() > 0)
 	{
 		CNodeRequest* Temp;
 		Temp = this->head;
 
-		return Temp;
+		return (Temp->getRequest());
 	}
 
 }
 
-CNodeRequest* CRequestQueue::ReturnTail()
-{
-	if (Size() > 0)
-	{
-		CNodeRequest* Temp;
-		Temp = this->tail;
-
-		return Temp;
-	}
-}
