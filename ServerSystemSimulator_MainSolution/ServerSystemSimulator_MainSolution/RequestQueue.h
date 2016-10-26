@@ -14,7 +14,6 @@ private:
 	CNodeRequest * tail;
 	int counter;
 public:
-	CNodeRequest* ReturnHead();
-	CNodeRequest* ReturnTail();
+	CRequest ReturnHead();
 };
 
