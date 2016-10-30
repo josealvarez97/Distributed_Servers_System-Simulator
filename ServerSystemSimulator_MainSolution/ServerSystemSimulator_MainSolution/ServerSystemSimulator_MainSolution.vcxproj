@@ -110,9 +110,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DisplayInformation.cpp" />
     <ClCompile Include="DNode.cpp" />
     <ClCompile Include="DoubleLinkedList.cpp" />
     <ClCompile Include="DoubleLinkedQueue.cpp" />
+    <ClCompile Include="LoadBalancer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="NodeRequest.cpp" />
     <ClCompile Include="ReadFile.cpp" />
@@ -123,9 +125,11 @@
     <ClCompile Include="Stack.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DisplayInformation.h" />
     <ClInclude Include="DNode.h" />
     <ClInclude Include="DoubleLinkedList.h" />
     <ClInclude Include="DoubleLinkedQueue.h" />
+    <ClInclude Include="LoadBalancer.h" />
     <ClInclude Include="NodeRequest.h" />
     <ClInclude Include="ReadFile.h" />
     <ClInclude Include="Request.h" />

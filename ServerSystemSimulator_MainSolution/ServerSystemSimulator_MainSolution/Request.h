@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-enum typeOfOperation {NEG, SUM, SUB, MUL, DIV}; //NEG = 0, SUM = 1...
+enum typeOfOperation {NEG, SUM, SUB, MUL, DIV, NOTYPE}; //NEG = 0, SUM = 1...
 using namespace std;
 class CRequest
 {
@@ -28,5 +28,6 @@ public:
 	int GetResult();
 	void SetResult(int number);
 	void SetComplete(bool value);
+	string GetType_str();
 };
 

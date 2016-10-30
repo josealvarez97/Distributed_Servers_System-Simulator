@@ -1,1 +1,5 @@
-﻿
+﻿  Server.cpp
+c:\users\oscar\desktop\proyecto servidores\serversystemsimulator_mainsolution\serversystemsimulator_mainsolution\server.cpp(183): warning C4018: '<': no coinciden signed/unsigned
+c:\users\oscar\desktop\proyecto servidores\serversystemsimulator_mainsolution\serversystemsimulator_mainsolution\server.cpp(186): warning C4018: '<': no coinciden signed/unsigned
+  ServerSystemSimulator_MainSolution.vcxproj -> C:\Users\Oscar\Desktop\Proyecto Servidores\ServerSystemSimulator_MainSolution\Debug\ServerSystemSimulator_MainSolution.exe
+  ServerSystemSimulator_MainSolution.vcxproj -> C:\Users\Oscar\Desktop\Proyecto Servidores\ServerSystemSimulator_MainSolution\Debug\ServerSystemSimulator_MainSolution.pdb (Partial PDB)

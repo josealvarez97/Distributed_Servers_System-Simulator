@@ -13,7 +13,7 @@ public:
 	CNode *getNext();
 	int getValue();
 
-private:
+public:
 	CNode * previous;
 	int value;
 	CNode * next;
