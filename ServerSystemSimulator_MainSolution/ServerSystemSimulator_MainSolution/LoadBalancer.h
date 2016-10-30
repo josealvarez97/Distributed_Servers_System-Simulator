@@ -4,7 +4,7 @@
 class CLoadBalancer
 {
 private:
-	CRequest currentFirstRequest, currentSecondRequest, currentThirdRequest;
+	CRequest *currentFirstRequest, *currentSecondRequest, *currentThirdRequest;
 	CServer *server1, *server2, *server3;
 
 public:
@@ -14,10 +14,10 @@ public:
 
 
 
-	void TakeRequestFromRequestQueue(CRequest request, int currentRequestPlace);
-	CRequest GetCurrentFirstRequest();
-	CRequest GetCurrentSecondRequest();
-	CRequest GetCurrentThirdRequest();
-	bool TryToAssignRequestToAServer(CRequest request);
+	void TakeRequestFromRequestQueue(CRequest *request, int currentRequestPlace);
+	CRequest* GetCurrentFirstRequest();
+	CRequest* GetCurrentSecondRequest();
+	CRequest* GetCurrentThirdRequest();
+	bool TryToAssignRequestToAServer(CRequest* request);
 };
 

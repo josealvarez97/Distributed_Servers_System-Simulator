@@ -33,16 +33,16 @@ void CDisplayInformation::DisplayTotals(CRequestStack successfullRequestsStack, 
 {
 
 	cout << "------REQUESTS EXITOSAS-------" << endl;
-	for (int i = 0; i < successfullRequestsStack.Size(); i++)
+	for (int i = successfullRequestsStack.Size(); i > 0; i--)
 	{
-		DisplayRequestInformation(successfullRequestsStack.Top());
+		DisplayRequestInformation(*successfullRequestsStack.Top());
 		successfullRequestsStack.Pop();
 	}
 	cout << endl << endl;
 	cout << "------REQUESTS FALLIDAS-------" << endl;
-	for (int i = 0; i < failedRequestsStack.Size(); i++)
+	for (int i = failedRequestsStack.Size(); i > 0 ; i--)
 	{
-		DisplayRequestInformation(failedRequestsStack.Top());
+		DisplayRequestInformation(*failedRequestsStack.Top());
 		failedRequestsStack.Pop();
 	}
 
