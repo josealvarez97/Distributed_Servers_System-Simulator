@@ -8,8 +8,8 @@ public:
 	~CRequestStack();
 	void Pop();
 	int Size();
-	void Push(CRequest request);
-	CRequest Top();
+	void Push(CRequest *request);
+	CRequest* Top();
 private:
 	CNodeRequest * head;
 	CNodeRequest * tail;

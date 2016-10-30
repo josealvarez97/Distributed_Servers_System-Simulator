@@ -10,7 +10,7 @@ private:
 	int numberOfProcessingSpacesNeeded;
 	string ramNumbers;
 	int numberOfRamSpacesNeeded;
-	char requestIdentifier;
+	int requestIdentifier;
 	bool completed;
 	int result;
 public:
@@ -22,8 +22,8 @@ public:
 	typeOfOperation GetTypeOfOperation();
 	string GetProcessingNumbers();
 	string GetRamNumbers();
-	void SetIdentifier(char identifier);
-	char GetIdentifier();
+	void SetIdentifier(int identifier);
+	int GetIdentifier();
 	bool IsComplete();
 	int GetResult();
 	void SetResult(int number);
