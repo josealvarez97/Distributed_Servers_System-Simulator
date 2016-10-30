@@ -33,7 +33,7 @@ bool DoubleLinkedList::Add(int number)
 {
 	if (counter <= MAX_SIZE || MAX_SIZE != -1)
 	{
-		if (this->head)
+		if (this->head) // si head no es nullptr
 		{
 			CNode  *n = new CNode(number);
 			n->setPrevious(this->tail);
@@ -86,7 +86,7 @@ int DoubleLinkedList::FirstElement()
 		return this->head->getValue();
 	}
 	return -1;
-	
+
 }
 
 /// This method returns the size of the list
@@ -112,7 +112,7 @@ int DoubleLinkedList::LastElement()
 // This method removes the first element of the list
 bool DoubleLinkedList::RemoveHead()
 {
-	if (counter > 0)
+	if (counter > 1)
 	{
 		CNode * Temp = new CNode();
 		Temp = this->head;
@@ -123,7 +123,14 @@ bool DoubleLinkedList::RemoveHead()
 		delete Temp; // Lo eliminamos para que no ocupe espacio en memoria
 		return true;
 	}
-	return false;
+	else if (counter == 1)
+	{
+		this->tail = nullptr;
+		this->head = nullptr;
+		counter--;
+	}
+	else
+		return false;
 }
 
 
@@ -149,7 +156,7 @@ int DoubleLinkedList::ItemAtIndex(int index)
 
 bool DoubleLinkedList::InsertBeforeOf(int number, int position)
 {
-	if (counter >  0)
+	if (counter > 0)
 	{
 		int temporary = 0;
 		CNode *Temp1 = new CNode();
@@ -163,7 +170,7 @@ bool DoubleLinkedList::InsertBeforeOf(int number, int position)
 			temporary++;
 		}
 
-		
+
 		Temp->setPrevious(Temp1->getPrevious()); // Setea el previous del nuevo nodo a lo que apuntara el previous del nodo temporal1
 		Temp1->getPrevious()->setNext(Temp); // Al previous del nodo temporal1 le setea de next el nuevo nodo.
 		Temp->setNext(Temp1); // Al nodo que se desea agregar se le setea de next el temporal1
@@ -186,7 +193,7 @@ bool DoubleLinkedList::InsertAfterOf(int number, int position)
 		int temporary = 0;
 		CNode * Temp1 = new CNode();
 		CNode * Temp = new CNode(number);
-		
+
 		Temp1 = this->head;
 
 		while (temporary < position)
@@ -229,17 +236,24 @@ int DoubleLinkedList::IndexOf(int value)
 
 bool DoubleLinkedList::RemoveTail()
 {
-	if (counter > 0)
+	if (counter > 1)
 	{
 		CNode * Temp = new CNode();
 		Temp = this->tail;
 
-		this -> tail = Temp->getPrevious();
+		this->tail = Temp->getPrevious();
 		this->tail->setNext(nullptr);
 		delete Temp; // Lo eliminamos para que no ocupe espacio en memoria
 		counter--;
 	}
-	return false;
+	else if (counter == 1)
+	{
+		this->tail = nullptr;
+		this->head = nullptr;
+		counter--;
+	}
+	else
+		return false;
 }
 
 

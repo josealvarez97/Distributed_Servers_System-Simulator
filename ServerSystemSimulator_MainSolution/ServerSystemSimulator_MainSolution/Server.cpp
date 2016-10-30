@@ -10,7 +10,7 @@ int CServer::RamFreeSpace()
 
 int CServer::ProcessingQueueFreeSpace()
 {
-	return this->serverProcessingQueue.GetMAX_Size() - this->serverProcessingQueue.GetMAX_Size();
+	return this->serverProcessingQueue.GetMAX_Size() - this->serverProcessingQueue.Size();
 }
 
 void CServer::OperateRam(int currentRequestRamNumbers, typeOfOperation type)
@@ -144,6 +144,7 @@ void CServer::Work()
 			if (this->CurrentRequestProcessingNumbersLeft != 0)
 			{
 				this->serverProcessingQueue.Dequeue();
+				this->CurrentRequestProcessingNumbersLeft--;
 			}
 			// O OPERAMOS LA RAM
 			else
@@ -176,14 +177,14 @@ bool CServer::AskAvailability(int processingSpaceNecessary, int ramSpaceNecessar
 		return false;
 }
 
-void CServer::ReceiveRequest(CRequest* request)
+void CServer::ReceiveRequest(CRequest request)
 {
 	// Assign RAM numbers
-	for (int i = 0 ; i < request->GetRamNumbers().length(); i++)
-		this->serverRAM.Add(atoi(request->GetRamNumbers().substr(1, i).c_str()));
+	for (int i = 0 ; i < request.GetRamNumbers().length(); i++)
+		this->serverRAM.Add(atoi(request.GetRamNumbers().substr(i, 1).c_str()));
 	// Assign Processing numbers
-	for (int i = 0; i < request->GetProcessingNumbers().length(); i++)
-		this->serverProcessingQueue.Queue(atoi(request->GetProcessingNumbers().substr(1, i).c_str()));
+	for (int i = 0; i < request.GetProcessingNumbers().length(); i++)
+		this->serverProcessingQueue.Queue(atoi(request.GetProcessingNumbers().substr(i, 1).c_str()));
 
 	// EnQueue request to Server Request Queue
 	this->serverRequestsQueue.Queue(request);

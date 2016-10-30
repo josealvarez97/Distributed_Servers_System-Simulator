@@ -59,9 +59,11 @@ void CReadFile::ReadInput(string Entrada, int ServersProccessingInfo[3], int Ser
 				newRequest.SetTypeOfOperation(NEG);
 				// Next line: Read Proccessing Numbers
 				(getline(file, p));
+				p.erase(remove_if(p.begin(), p.end(), isspace), p.end());
 				newRequest.SetProcessingNumbers(p);
 				// Next line: Read Ram Numbers
 				(getline(file, p));
+				p.erase(remove_if(p.begin(), p.end(), isspace), p.end());
 				newRequest.SetRamNumbers(p);
 			}
 			else if (p == "SUM")
@@ -69,9 +71,11 @@ void CReadFile::ReadInput(string Entrada, int ServersProccessingInfo[3], int Ser
 				newRequest.SetTypeOfOperation(SUM);
 				// Next line: Read Proccessing Numbers
 				(getline(file, p));
+				p.erase(remove_if(p.begin(), p.end(), isspace), p.end());
 				newRequest.SetProcessingNumbers(p);
 				// Next line: Read Ram Numbers
 				(getline(file, p));
+				p.erase(remove_if(p.begin(), p.end(), isspace), p.end());
 				newRequest.SetRamNumbers(p);
 			}
 			else if (p == "SUB") 
@@ -79,9 +83,11 @@ void CReadFile::ReadInput(string Entrada, int ServersProccessingInfo[3], int Ser
 				newRequest.SetTypeOfOperation(SUB);
 				// Next line: Read Proccessing Numbers
 				(getline(file, p));
+				p.erase(remove_if(p.begin(), p.end(), isspace), p.end());
 				newRequest.SetProcessingNumbers(p);
 				// Next line: Read Ram Numbers
 				(getline(file, p));
+				p.erase(remove_if(p.begin(), p.end(), isspace), p.end());
 				newRequest.SetRamNumbers(p);
 			}
 			else if (p == "MUL")
@@ -89,9 +95,11 @@ void CReadFile::ReadInput(string Entrada, int ServersProccessingInfo[3], int Ser
 				newRequest.SetTypeOfOperation(MUL);
 				// Next line: Read Proccessing Numbers
 				(getline(file, p));
+				p.erase(remove_if(p.begin(), p.end(), isspace), p.end());
 				newRequest.SetProcessingNumbers(p);
 				// Next line: Read Ram Numbers
 				(getline(file, p));
+				p.erase(remove_if(p.begin(), p.end(), isspace), p.end());
 				newRequest.SetRamNumbers(p);
 			}
 			else if (p == "DIV")
@@ -99,16 +107,18 @@ void CReadFile::ReadInput(string Entrada, int ServersProccessingInfo[3], int Ser
 				newRequest.SetTypeOfOperation(DIV);
 				// Next line: Read Proccessing Numbers
 				(getline(file, p));
+				p.erase(remove_if(p.begin(), p.end(), isspace), p.end());
 				newRequest.SetProcessingNumbers(p);
 				// Next line: Read Ram Numbers
 				(getline(file, p));
+				p.erase(remove_if(p.begin(), p.end(), isspace), p.end());
 				newRequest.SetRamNumbers(p);
 			}
 
 
 			// Queue newRequest to RequestQueue
 
-			requestQueue->Queue(&newRequest);
+			requestQueue->Queue(newRequest);
 			//delete newRequest; no se elimina porque al no ser un puntero, automaticamente al salir de este metodo se llama al destructor de la clase
 		}
 

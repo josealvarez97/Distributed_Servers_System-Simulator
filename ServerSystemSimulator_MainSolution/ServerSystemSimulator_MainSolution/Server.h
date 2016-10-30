@@ -27,7 +27,7 @@ public:
 
 	void Work();
 	bool AskAvailability(int processingSpaceNecessary, int ramSpaceNecessary);
-	void ReceiveRequest(CRequest* request);
+	void ReceiveRequest(CRequest request);
 
 
 };

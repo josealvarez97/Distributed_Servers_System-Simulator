@@ -4,6 +4,8 @@
 
 CRequestStack::CRequestStack()
 {
+	this->counter = 0;
+	
 }
 
 
@@ -21,42 +23,39 @@ void CRequestStack::Pop()
 		CNodeRequest * Temp = new CNodeRequest();
 		Temp = this->tail;
 
-		this->tail = Temp->getPrevious();
+		this->tail = tail->getPrevious();
 		this->tail->setNext(nullptr);
 		delete Temp; // Lo eliminamos para que no ocupe espacio en memoria
-		counter--;
+		this->counter--;
 	}
 }
 
 
-void CRequestStack::Push(CRequest* request)
+void CRequestStack::Push(CRequest request)
 {
 	if (this->head)
 	{
-		CNodeRequest * n = new CNodeRequest(*request);
-		this->head->setPrevious(n);
-		n->setNext(this->head);
-		this->head = n;
-		counter++;
+		CNodeRequest * n = new CNodeRequest(request);
+		this->tail->setNext(n);
+		n->setPrevious(this->tail);
+		this->tail = n;
+		this->counter++;
 	}
 	else
 	{
-		CNodeRequest *n = new CNodeRequest(*request);
+		CNodeRequest *n = new CNodeRequest(request);
 		this->head = n;
 		this->tail = n;
-		counter++;
+		this->counter++;
 	}
 }
 
 
-CRequest CRequestStack::Peek()
+CRequest CRequestStack::Top()
 {
 	if (Size() > 0)
 	{
-		CNodeRequest* Temp;
-		Temp = this->tail;
-
-		return (Temp->getRequest());
+		return this->tail->getRequest();
 	}
 }
 
