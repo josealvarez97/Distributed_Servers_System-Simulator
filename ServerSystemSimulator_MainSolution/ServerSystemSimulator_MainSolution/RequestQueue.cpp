@@ -27,7 +27,7 @@ CRequestQueue::~CRequestQueue()
 	delete this->tail;
 }
 
-bool CRequestQueue::Queue(CRequest Request)
+bool CRequestQueue::Queue(CRequest *Request)
 {
 	if (this->head)
 	{
@@ -55,9 +55,9 @@ int CRequestQueue::Size()
 	return this->counter;
 }
 
-CRequest CRequestQueue::Dequeue()
+CRequest* CRequestQueue::Dequeue()
 {
-	CRequest Temp;
+	CRequest *Temp;
 
 	if (counter > 1)
 	{
@@ -78,19 +78,24 @@ CRequest CRequestQueue::Dequeue()
 	}
 	else
 	{
-		return CRequest();
+		return nullptr;
 	}
 }
 
 
-CRequest CRequestQueue::ReturnHead()
+CRequest* CRequestQueue::ReturnHead()
 {
 	//if (Size() > 0)
 	//{
 
 
-		return this->head->getRequest();
+	return this->head->getRequest();
 	/*}*/
 
 }
+
+//CRequest * CRequestQueue::ReturnHeadPtr()
+//{
+//	return this->head->getRequest();
+//}
 

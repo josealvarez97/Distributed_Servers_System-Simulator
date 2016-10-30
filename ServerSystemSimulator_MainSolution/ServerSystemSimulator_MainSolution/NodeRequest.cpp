@@ -7,7 +7,7 @@ CNodeRequest::CNodeRequest()
 	this->previous = nullptr;
 }
 
-CNodeRequest::CNodeRequest(CRequest Request)
+CNodeRequest::CNodeRequest(CRequest* Request)
 {
 	this->next = nullptr;
 	this->previous = nullptr;
@@ -20,7 +20,7 @@ CNodeRequest::~CNodeRequest()
 }
 
 
-void CNodeRequest::setRequest(CRequest Request)
+void CNodeRequest::setRequest(CRequest* Request)
 {
 	this->request = Request;
 }
@@ -47,7 +47,7 @@ CNodeRequest * CNodeRequest::getNext()
 	return this->next;
 }
 
-CRequest CNodeRequest::getRequest()
+CRequest* CNodeRequest::getRequest()
 {
 	return this->request;
 }

@@ -26,7 +26,7 @@ int main()
 
 	//Leer entrada y Meter Requests en CR
 	CReadFile* objReadFile = new CReadFile();
-	objReadFile->ReadInput("C:/Users/Oscar/Desktop/Proyecto Servidores/ServerSystemSimulator_MainSolution/ServerSystemSimulator_MainSolution/Entrada.txt", ServersProcessingInfo, ServersRamInfo, ServersOperationsPerTickInfo, requestsQueue);
+	objReadFile->ReadInput("C:/Users/jjaa0/Documents/GitHub/Servers_System_Simulator/ServerSystemSimulator_MainSolution/ServerSystemSimulator_MainSolution/Entrada.txt", ServersProcessingInfo, ServersRamInfo, ServersOperationsPerTickInfo, requestsQueue);
 
 
 	//Inicializar Objetos
@@ -55,9 +55,12 @@ int main()
 
 		cout << "Request cargadas al Balanceador de Carga:" << endl;
 		//obj->DisplayRequestInformation(*(loadBalancer->GetCurrentFirstRequest()));
-		CDisplayInformation::DisplayRequestInformation(loadBalancer->GetCurrentFirstRequest());
-		CDisplayInformation::DisplayRequestInformation(loadBalancer->GetCurrentSecondRequest());
-		CDisplayInformation::DisplayRequestInformation(loadBalancer->GetCurrentThirdRequest());
+		if (loadBalancer->GetCurrentFirstRequest() != nullptr)
+			CDisplayInformation::DisplayRequestInformation(*loadBalancer->GetCurrentFirstRequest());
+		if (loadBalancer->GetCurrentSecondRequest() != nullptr)
+			CDisplayInformation::DisplayRequestInformation(*loadBalancer->GetCurrentSecondRequest());
+		if (loadBalancer->GetCurrentThirdRequest() != nullptr)
+			CDisplayInformation::DisplayRequestInformation(*loadBalancer->GetCurrentThirdRequest());
 
 
 
@@ -66,26 +69,29 @@ int main()
 		//Comunicar con servidores
 
 
-		if (loadBalancer->TryToAssignRequestToAServer(loadBalancer->GetCurrentFirstRequest()) == false)
+		if (loadBalancer->TryToAssignRequestToAServer(loadBalancer->GetCurrentFirstRequest()) == false
+			&& loadBalancer->GetCurrentFirstRequest() != nullptr)
 		{
 			failedRequestsStack->Push(loadBalancer->GetCurrentFirstRequest());//If impossible, request to failed requests stack
 			cout << "(La siguiente peticion no se asigno exitosamente):   ";
-			CDisplayInformation::DisplayIdentifier(loadBalancer->GetCurrentFirstRequest());
+			CDisplayInformation::DisplayIdentifier(*loadBalancer->GetCurrentFirstRequest());
 		}
 
-		if (loadBalancer->TryToAssignRequestToAServer(loadBalancer->GetCurrentSecondRequest()) == false)
+		if (loadBalancer->TryToAssignRequestToAServer(loadBalancer->GetCurrentSecondRequest()) == false
+			&& loadBalancer->GetCurrentSecondRequest() != nullptr)
 		{
 			failedRequestsStack->Push(loadBalancer->GetCurrentSecondRequest());//If impossible, request to
 			cout << "(La siguiente peticion no se asigno exitosamente):   ";
-			CDisplayInformation::DisplayIdentifier(loadBalancer->GetCurrentSecondRequest());
+			CDisplayInformation::DisplayIdentifier(*loadBalancer->GetCurrentSecondRequest());
 
 		}
 
-		if (loadBalancer->TryToAssignRequestToAServer(loadBalancer->GetCurrentThirdRequest()) == false)
+		if (loadBalancer->TryToAssignRequestToAServer(loadBalancer->GetCurrentThirdRequest()) == false
+			&& loadBalancer->GetCurrentThirdRequest() != nullptr)
 		{
 			failedRequestsStack->Push(loadBalancer->GetCurrentThirdRequest());//If impossible, request to
 			cout << "(La siguiente peticion no se asigno exitosamente):   ";
-			CDisplayInformation::DisplayIdentifier(loadBalancer->GetCurrentThirdRequest());
+			CDisplayInformation::DisplayIdentifier(*loadBalancer->GetCurrentThirdRequest());
 
 		}
 

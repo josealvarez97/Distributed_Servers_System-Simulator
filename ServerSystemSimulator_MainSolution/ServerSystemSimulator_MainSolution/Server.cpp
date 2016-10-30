@@ -29,7 +29,7 @@ void CServer::OperateRam(int currentRequestRamNumbers, typeOfOperation type)
 			result += this->serverRAM.RemoveHead();
 			currentRequestRamNumbers--;
 		}
-		this->serverRequestsQueue.ReturnHead().SetResult(result); // Al request actual le seteamos el resultado de su respectiva operación
+		this->serverRequestsQueue->ReturnHead()->SetResult(result); // Al request actual le seteamos el resultado de su respectiva operación
 		break;
 	case SUB:
 		while (currentRequestRamNumbers != 0)
@@ -37,7 +37,7 @@ void CServer::OperateRam(int currentRequestRamNumbers, typeOfOperation type)
 			result -= this->serverRAM.RemoveHead();
 			currentRequestRamNumbers--;
 		}
-		this->serverRequestsQueue.ReturnHead().SetResult(result);
+		this->serverRequestsQueue->ReturnHead()->SetResult(result);
 		break;
 	case MUL:
 		/*
@@ -60,7 +60,7 @@ void CServer::OperateRam(int currentRequestRamNumbers, typeOfOperation type)
 			}
 		}
 		result = result * lastdigit;
-		this->serverRequestsQueue.ReturnHead().SetResult(result);
+		this->serverRequestsQueue->ReturnHead()->SetResult(result);
 		break;
 	case DIV:
 
@@ -71,7 +71,7 @@ void CServer::OperateRam(int currentRequestRamNumbers, typeOfOperation type)
 		}
 		lastdigit = this->serverRAM.RemoveHead();
 		result = result / lastdigit;
-		this->serverRequestsQueue.ReturnHead().SetResult(result);
+		this->serverRequestsQueue->ReturnHead()->SetResult(result);
 		break;
 	default:
 		break;
@@ -88,6 +88,8 @@ CServer::CServer(int processingSize, int ramSize, int operationsPerTick, CReques
 	// -1 means value out of context. we don't have a logical value to assign.
 	this->CurrentRequestRAMNumbers = -1; 
 	this->CurrentRequestProcessingNumbersLeft = -1;
+
+	this->serverRequestsQueue = new CRequestQueue();
 }
 
 CServer::~CServer()
@@ -98,32 +100,33 @@ void CServer::Work()
 {
 	// Necesitamos algoritmos y formas de guardar la informacion de las peticioenes...
 	int operations = 0;
-	while(operations < this->operationsPerTick)
+	while(operations < this->operationsPerTick && this->serverRequestsQueue->Size() != 0)
 	{
+
 		// EVALUAR SI CONTADORES ESTAN FUERA DE CONTEXTO (Esto se daría cuando tengamos que trabajar un request "inicial" o que no tenga un request completado una operacion/instante antes)
 		// Nota... el primer request en ejecutarse sera un problema para setear los contadores.
 		if (this->CurrentRequestRAMNumbers == -1 && this->CurrentRequestProcessingNumbersLeft == -1)
 		{
 			// Reset ram numbers left. 
-			this->CurrentRequestRAMNumbers = this->serverRequestsQueue.ReturnHead().GetRamNumbers().length();
+			this->CurrentRequestRAMNumbers = this->serverRequestsQueue->ReturnHead()->GetRamNumbers().length();
 			// Reset processing numbers left.
-			this->CurrentRequestProcessingNumbersLeft = this->serverRequestsQueue.ReturnHead().GetProcessingNumbers().length();
+			this->CurrentRequestProcessingNumbersLeft = this->serverRequestsQueue->ReturnHead()->GetProcessingNumbers().length();
 		}
 
 
 		// EVALUAR SI SE COMPLETO UN REQUEST UNA OPERACIÓN ANTES.
-		if (this->serverRequestsQueue.ReturnHead().IsComplete() == true)
+		if (this->serverRequestsQueue->ReturnHead()->IsComplete() == true)
 		{
 			// Push completed request to suceessful requests stack
-			this->sucessfullRequestsStack->Push(serverRequestsQueue.Dequeue());
+			this->sucessfullRequestsStack->Push(serverRequestsQueue->Dequeue());
 
-			if (this->serverRequestsQueue.Size() != 0) // EVALUAR SI REQUEST NO ESTA VACIA LUEGO DE HABER HECHO DEQUE (SIGNIFICA HAY REQUESTS ESPERANDO EN LA COLA...)
+			if (this->serverRequestsQueue->Size() != 0) // EVALUAR SI REQUEST NO ESTA VACIA LUEGO DE HABER HECHO DEQUE (SIGNIFICA HAY REQUESTS ESPERANDO EN LA COLA...)
 			{
 				//(Next request quantity of ram numbers and processing numbers)
 				// Reset ram numbers left. 
-				this->CurrentRequestRAMNumbers = this->serverRequestsQueue.ReturnHead().GetRamNumbers().length();
+				this->CurrentRequestRAMNumbers = this->serverRequestsQueue->ReturnHead()->GetRamNumbers().length();
 				// Reset processing numbers left.
-				this->CurrentRequestProcessingNumbersLeft = this->serverRequestsQueue.ReturnHead().GetProcessingNumbers().length();
+				this->CurrentRequestProcessingNumbersLeft = this->serverRequestsQueue->ReturnHead()->GetProcessingNumbers().length();
 			}
 			else // SI ESTA VACIA ES PORQUE NO HABIAN REQUESTS ESPERANDO EN LA COLA. "APAGMOS EL MOTOR XD"
 			{
@@ -150,8 +153,8 @@ void CServer::Work()
 			else
 			{
 				// Operamos la ram... metodo void OperarRam(tipo de Operacion, etc)
-				OperateRam(CurrentRequestRAMNumbers, this->serverRequestsQueue.ReturnHead().GetTypeOfOperation());
-				this->serverRequestsQueue.ReturnHead().SetComplete(true);
+				OperateRam(CurrentRequestRAMNumbers, this->serverRequestsQueue->ReturnHead()->GetTypeOfOperation());
+				this->serverRequestsQueue->ReturnHead()->SetComplete(true);
 			}
 			operations++; // AUMENTAMOS EL CONTADOR DE OPERACIONES
 
@@ -177,17 +180,21 @@ bool CServer::AskAvailability(int processingSpaceNecessary, int ramSpaceNecessar
 		return false;
 }
 
-void CServer::ReceiveRequest(CRequest request)
+void CServer::ReceiveRequest(CRequest *request)
 {
-	// Assign RAM numbers
-	for (int i = 0 ; i < request.GetRamNumbers().length(); i++)
-		this->serverRAM.Add(atoi(request.GetRamNumbers().substr(i, 1).c_str()));
-	// Assign Processing numbers
-	for (int i = 0; i < request.GetProcessingNumbers().length(); i++)
-		this->serverProcessingQueue.Queue(atoi(request.GetProcessingNumbers().substr(i, 1).c_str()));
+	if (request != nullptr)
+	{
+		// Assign RAM numbers
+		for (int i = 0; i < request->GetRamNumbers().length(); i++)
+			this->serverRAM.Add(atoi(request->GetRamNumbers().substr(i, 1).c_str()));
+		// Assign Processing numbers
+		for (int i = 0; i < request->GetProcessingNumbers().length(); i++)
+			this->serverProcessingQueue.Queue(atoi(request->GetProcessingNumbers().substr(i, 1).c_str()));
 
-	// EnQueue request to Server Request Queue
-	this->serverRequestsQueue.Queue(request);
+		// EnQueue request to Server Request Queue
+		this->serverRequestsQueue->Queue(request);
+	}
+	
 
 
 

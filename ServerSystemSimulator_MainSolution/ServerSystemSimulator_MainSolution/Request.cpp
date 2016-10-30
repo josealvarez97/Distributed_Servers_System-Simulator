@@ -48,12 +48,12 @@ string CRequest::GetRamNumbers()
 	return ramNumbers;
 }
 
-void CRequest::SetIdentifier(char identifier)
+void CRequest::SetIdentifier(int identifier)
 {
 	this->requestIdentifier = identifier;
 }
 
-char CRequest::GetIdentifier()
+int CRequest::GetIdentifier()
 {
 	return this->requestIdentifier;
 }

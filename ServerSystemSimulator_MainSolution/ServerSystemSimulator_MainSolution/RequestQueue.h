@@ -5,15 +5,16 @@ class CRequestQueue
 public:
 	CRequestQueue();
 	~CRequestQueue();
-	bool Queue(CRequest Request);
+	bool Queue(CRequest* Request);
 	int Size();
-	CRequest Dequeue();
+	CRequest* Dequeue();
 
 private:
 	CNodeRequest * head;
 	CNodeRequest * tail;
 	int counter;
 public:
-	CRequest ReturnHead();
+	CRequest* ReturnHead();
+	//CRequest* ReturnHeadPtr();
 };
 

@@ -8,9 +8,9 @@ CLoadBalancer::CLoadBalancer(CServer* server1, CServer* server2, CServer* server
 	this->server2 = server2;
 	this->server3 = server3;
 
-	this->currentFirstRequest = CRequest();
-	this->currentSecondRequest = CRequest();
-	this->currentThirdRequest = CRequest();
+	this->currentFirstRequest = nullptr;
+	this->currentSecondRequest = nullptr;
+	this->currentThirdRequest = nullptr;
 }
 
 
@@ -19,7 +19,7 @@ CLoadBalancer::~CLoadBalancer()
 }
 
 
-void CLoadBalancer::TakeRequestFromRequestQueue(CRequest request, int currentRequestPlace)
+void CLoadBalancer::TakeRequestFromRequestQueue(CRequest* request, int currentRequestPlace)
 {
 	switch (currentRequestPlace)
 	{
@@ -40,47 +40,48 @@ void CLoadBalancer::TakeRequestFromRequestQueue(CRequest request, int currentReq
 }
 
 
-CRequest CLoadBalancer::GetCurrentFirstRequest()
+CRequest* CLoadBalancer::GetCurrentFirstRequest()
 {
 	return this->currentFirstRequest;
 }
 
 
 
-CRequest CLoadBalancer::GetCurrentSecondRequest()
+CRequest* CLoadBalancer::GetCurrentSecondRequest()
 {
 	return this->currentSecondRequest;
 }
 
 
-CRequest CLoadBalancer::GetCurrentThirdRequest()
+CRequest* CLoadBalancer::GetCurrentThirdRequest()
 {
 	return this->currentThirdRequest;
 }
 
 
-bool CLoadBalancer::TryToAssignRequestToAServer(CRequest request)
+bool CLoadBalancer::TryToAssignRequestToAServer(CRequest* request)
 {
 	bool succesfullAssignation = false;
 
-	if (this->server1->AskAvailability(request.GetProcessingNumbers().length(), request.GetRamNumbers().length()) == true
-		&& succesfullAssignation != true)
-	{
-		this->server1->ReceiveRequest(request);
-		succesfullAssignation = true;
-	}
-	else if (this->server2->AskAvailability(request.GetProcessingNumbers().length(), request.GetRamNumbers().length()) == true
-		&& succesfullAssignation != true)
-	{
-		this->server2->ReceiveRequest(request);
-		succesfullAssignation = true;
-	}
-	else if (this->server3->AskAvailability(request.GetProcessingNumbers().length(), request.GetRamNumbers().length()) == true
-		&& succesfullAssignation != true)
-	{
-		this->server3->ReceiveRequest(request);
-		succesfullAssignation = true;
-	}
+	if (request != nullptr)
+		if (this->server1->AskAvailability(request->GetProcessingNumbers().length(), request->GetRamNumbers().length()) == true
+			&& succesfullAssignation != true)
+		{
+			this->server1->ReceiveRequest(request);
+			succesfullAssignation = true;
+		}
+		else if (this->server2->AskAvailability(request->GetProcessingNumbers().length(), request->GetRamNumbers().length()) == true
+			&& succesfullAssignation != true)
+		{
+			this->server2->ReceiveRequest(request);
+			succesfullAssignation = true;
+		}
+		else if (this->server3->AskAvailability(request->GetProcessingNumbers().length(), request->GetRamNumbers().length()) == true
+			&& succesfullAssignation != true)
+		{
+			this->server3->ReceiveRequest(request);
+			succesfullAssignation = true;
+		}
 
 
 

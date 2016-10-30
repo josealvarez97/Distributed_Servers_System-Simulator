@@ -18,6 +18,7 @@ void CReadFile::ReadInput(string Entrada, int ServersProccessingInfo[3], int Ser
 	string p = "";
 	int serverCount = 0;
 	int line = 0;
+	int ID = 0;
 	/*
 
 	El asterisco * sirve para  --declarar un puntero-- Y para --"devolver la variable a la apunta"--.
@@ -52,72 +53,72 @@ void CReadFile::ReadInput(string Entrada, int ServersProccessingInfo[3], int Ser
 		{
 			p.erase(remove_if(p.begin(), p.end(), isspace));
 
-			CRequest newRequest;
+			CRequest *newRequest = new CRequest();
 			//NEG, SUM, SUB, MUL, DIV
 			if (p == "NEG")
 			{
-				newRequest.SetTypeOfOperation(NEG);
+				newRequest->SetTypeOfOperation(NEG);
 				// Next line: Read Proccessing Numbers
 				(getline(file, p));
 				p.erase(remove_if(p.begin(), p.end(), isspace), p.end());
-				newRequest.SetProcessingNumbers(p);
+				newRequest->SetProcessingNumbers(p);
 				// Next line: Read Ram Numbers
 				(getline(file, p));
 				p.erase(remove_if(p.begin(), p.end(), isspace), p.end());
-				newRequest.SetRamNumbers(p);
+				newRequest->SetRamNumbers(p);
 			}
 			else if (p == "SUM")
 			{
-				newRequest.SetTypeOfOperation(SUM);
+				newRequest->SetTypeOfOperation(SUM);
 				// Next line: Read Proccessing Numbers
 				(getline(file, p));
 				p.erase(remove_if(p.begin(), p.end(), isspace), p.end());
-				newRequest.SetProcessingNumbers(p);
+				newRequest->SetProcessingNumbers(p);
 				// Next line: Read Ram Numbers
 				(getline(file, p));
 				p.erase(remove_if(p.begin(), p.end(), isspace), p.end());
-				newRequest.SetRamNumbers(p);
+				newRequest->SetRamNumbers(p);
 			}
 			else if (p == "SUB") 
 			{
-				newRequest.SetTypeOfOperation(SUB);
+				newRequest->SetTypeOfOperation(SUB);
 				// Next line: Read Proccessing Numbers
 				(getline(file, p));
 				p.erase(remove_if(p.begin(), p.end(), isspace), p.end());
-				newRequest.SetProcessingNumbers(p);
+				newRequest->SetProcessingNumbers(p);
 				// Next line: Read Ram Numbers
 				(getline(file, p));
 				p.erase(remove_if(p.begin(), p.end(), isspace), p.end());
-				newRequest.SetRamNumbers(p);
+				newRequest->SetRamNumbers(p);
 			}
 			else if (p == "MUL")
 			{
-				newRequest.SetTypeOfOperation(MUL);
+				newRequest->SetTypeOfOperation(MUL);
 				// Next line: Read Proccessing Numbers
 				(getline(file, p));
 				p.erase(remove_if(p.begin(), p.end(), isspace), p.end());
-				newRequest.SetProcessingNumbers(p);
+				newRequest->SetProcessingNumbers(p);
 				// Next line: Read Ram Numbers
 				(getline(file, p));
 				p.erase(remove_if(p.begin(), p.end(), isspace), p.end());
-				newRequest.SetRamNumbers(p);
+				newRequest->SetRamNumbers(p);
 			}
 			else if (p == "DIV")
 			{
-				newRequest.SetTypeOfOperation(DIV);
+				newRequest->SetTypeOfOperation(DIV);
 				// Next line: Read Proccessing Numbers
 				(getline(file, p));
 				p.erase(remove_if(p.begin(), p.end(), isspace), p.end());
-				newRequest.SetProcessingNumbers(p);
+				newRequest->SetProcessingNumbers(p);
 				// Next line: Read Ram Numbers
 				(getline(file, p));
 				p.erase(remove_if(p.begin(), p.end(), isspace), p.end());
-				newRequest.SetRamNumbers(p);
+				newRequest->SetRamNumbers(p);
 			}
 
 
 			// Queue newRequest to RequestQueue
-
+			newRequest->SetIdentifier(ID++);
 			requestQueue->Queue(newRequest);
 			//delete newRequest; no se elimina porque al no ser un puntero, automaticamente al salir de este metodo se llama al destructor de la clase
 		}
