@@ -18,9 +18,18 @@ void CDoubleLinkedQueue::Queue(int number)
 
 int CDoubleLinkedQueue::Dequeue()
 {
-	int element = queue.LastElement();
-	queue.RemoveTail();
-	return element;
+	if (Size() > 0)
+	{
+		int element = queue.FirstElement();
+		queue.RemoveHead();
+		return element;
+	}
+	else 
+	{
+		return -1;
+	}
+
+
 }
 
 int CDoubleLinkedQueue::Size()

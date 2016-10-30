@@ -4,6 +4,11 @@
 CRequest::CRequest()
 {
 	this->completed = false;
+
+	this->requestIdentifier = -1;
+	this->operationType = NOTYPE;
+	this->ramNumbers = "-1";
+	this->processingQueueNumbers = "-1";
 }
 
 
@@ -28,7 +33,7 @@ void CRequest::SetRamNumbers(string numbers)
 	this->numberOfRamSpacesNeeded = numbers.length();
 }
 
-int CRequest::GetTypeOfOperation()
+typeOfOperation CRequest::GetTypeOfOperation()
 {
 	return operationType;
 }
@@ -52,3 +57,50 @@ char CRequest::GetIdentifier()
 {
 	return this->requestIdentifier;
 }
+
+bool CRequest::IsComplete()
+{
+	return this->completed;
+}
+
+int CRequest::GetResult()
+{
+	return this->result;
+}
+
+void CRequest::SetResult(int number)
+{
+	this->result = number;
+}
+
+void CRequest::SetComplete(bool value)
+{
+	this->completed = value;
+}
+
+string CRequest::GetType_str()
+{
+	switch (this->operationType)
+	{
+	case MUL:
+		return "MUL";
+		break;
+	case SUM:
+		return "SUM";
+		break;
+	case SUB:
+		return "SUB";
+		break;
+	case DIV:
+		return "DIV";
+		break;
+	case NEG:
+		return "NEG";
+		break;
+	default:
+		return "NOVALIDTYPE";
+		break;
+
+	}
+}
+
