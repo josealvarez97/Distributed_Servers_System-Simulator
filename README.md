@@ -1,5 +1,5 @@
 # Servers System Simulator
-This project is about simulating a distributed servers system. The idea behind this systems is to attend as many requests as quickly as possible with the available computational resources.
+This project is about simulating a distributed servers system. The idea behind these systems is to attend as many requests as quickly as possible with the available computational resources.
 
 ## (INSTRUCTIONS FOR RUNNING THE PROGRAM)
 The program will ask you to write the path of the text file containing the input. Then just put on your seat belt and enjoy the simulation.
@@ -10,7 +10,7 @@ The program will ask you to write the path of the text file containing the input
 -Input Example: https://github.com/josealvarez97/Servers_System_Simulator/blob/master/ServerSystemSimulator_MainSolution/ServerSystemSimulator_MainSolution/Entrada.txt
 
 ## HOW DOES THE SIMULATION WORKS?
-First of all we send all the requests from the file to the request queue, after that the load balancer takes the first three requests of the queue, this is the part where the load balancer has to comunicate with each server to know if they can afford one request, if the actual server can't we ask to the other server, if any server can't afford the request we send it to the failed requests stack. But if one server can afford it we assign the request to the server, this is the moment where the tick starts. The servers have the ram list, and the processing queue, when the processing list is empty (talking about the elements of a specific request) we operate the ram, and send it to succesfull requests stack. This is the moment where the actual tick ends.
+First of all we send all the requests from the file to the request queue, after that the load balancer takes the first three requests from the queue, this is the part where the load balancer has to comunicate with each server to know if they can afford one request, if the current server can't we ask to the other server, if any server can't afford the request we send it to the failed requests stack. But if one server can afford it we assign the request to the server, this is the moment where the tick starts. The servers have the ram list, and the processing queue, when the processing list is empty (talking about the elements of a specific request) we operate the ram, and send it to succesfull requests stack. This is the moment where the actual tick ends.
 
 ### BASIC ALGORITHM
 1. Read Input & queue requests into Requests Queue
@@ -33,23 +33,23 @@ First of all we send all the requests from the file to the request queue, after 
 
 ### Principal Classes 
 #### Server
-##### Atributtes
+##### Principal Atributtes
 - CRequestQueue ProcessingQueue
 - CList Ram
 - int OperationsPerTick
 
-##### Methods
+##### Principal Methods
 - void Work(): This methods does as many operations per tick as possible.
 - bool AskAvailability(int processingSpaceNecessary, int ramSpaceNecessary): This function receives the parameters
   of a request and return if it is possible for the server to attend the request.
 
 #### LoadBalancer
-##### Atributtes
+##### Principal Atributtes
 - CurrentFirstRequest
 - CurrentSecondRequest
 - CurrentThirdRequest
 
-##### Methods
+##### Principal Methods
 - void TakeRequestFromRequestQueue(CRequest request)
 - CRequest GetCurrentFirstRequest()
 - CRequest GetCurrentSecondRequest()
@@ -61,16 +61,15 @@ First of all we send all the requests from the file to the request queue, after 
 ## What is considered **ONE** operation?
 - Every rotation of **Hard Disc**. (rotating from 1 to 4 or any other number is an operation)
 - Consuming an element from the **Processing Queue**.
-- Reorganize / Reordering the **RAM**.
+- Operate **RAM**.
 - Executing a **Complete Request** (example, making everything neccesary to sum SUM, multiply in MUL, divide in DIV)
-
 
 ## OPTIMIZATIONS / EXTRAS
 
-**We claim that we always assign a request to the server in best conditions.**
+**We claim that we always assign a request to the server in best conditions to attend it.**
 How?
 
-We formulate a formula we called ***serverRank***. It measures how difficult is for a server to attend a request at the current tick, based on the *serverDegree* , *requestsWeight* and *serverOperationsPerTick*. It is computated as follows:
+We formulated a formula that we called ***serverRank***. It measures how difficult is for a server to attend a request at the current tick, based on the *serverDegree* , *requestsWeight* and *serverOperationsPerTick*. It is computated as follows:
 
       serverRank = (serverDegree * requestsWeight) / serverOperationsPerTick
 
@@ -79,7 +78,7 @@ where:
 - requestsWeight is the sum of the ramSpace and ProcessingSpace needed for attending every requests assigned to a server
 - operationsPerTick is the number of operations that a server can perform on a tick.
 
-In summary, it is based on the fact that how "fucked up" is a server is directly proportional to how complex are the tasks assigned, and inversely proportional to the capacity/power of the server.
+In summary, **it is based on the fact that how "fucked up" is a server is directly proportional to how complex are the tasks assigned, and inversely proportional to the capacity/power of the server.**
 
 
 
