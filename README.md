@@ -7,6 +7,19 @@ The program will ask you to write the path of the text file containing the input
 -Example of how to type the input location:
 ![alt text](https://github.com/josealvarez97/Servers_System_Simulator/blob/master/Sketch/Entrada.PNG)
 
+## HOW DOES THE SIMULATION WORKS?
+First of all we send all the requests from the file to the request queue, after that the load balancer takes the first three requests of the queue, this is the part where the load balancer has to comunicate with each server to know if they can afford one request, if the actual server can't we ask to the other server, if any server can't afford the request we send it to the failed requests stack. But if one server can afford it we assign the request to the server, this is the moment where the tick starts. The servers have the ram list, and the processing queue, when the processing list is empty (talking about the elements of a specific request) we operate the ram, and send it to succesfull requests stack. This is the moment where the actual tick ends.
+
+### BASIC ALGORITHM
+1. Read Input & queue requests into Requests Queue
+2. Start Tick
+3. Load Balancer takes three requests from requests queue
+4. Load Balancer comunicates with servers
+5. Servers work (they perform as many operations as they can in a tick)
+6. Tick Ends. Go back to step 2 if there are still requests wating on requests queue OR 
+   there's still a server working.
+7. Display totals.
+
 ## BASIC STRUCTURE
 ### Principal Classes 
 #### Server
@@ -34,19 +47,6 @@ The program will ask you to write the path of the text file containing the input
 - bool TryToAssignRequestToAServer(): this methods asks servers if it is possible
   to assign a request. If no server can take the request, loadBalancer sends it to
   failedRequestsStack.
-
-
-## HOW DOES THE SIMULATION WORKS?
-First of all we send all the requests from the file to the request queue, after that the load balancer takes the first three requests of the queue, this is the part where the load balancer has to comunicate with each server to know if they can afford one request, if the actual server can't we ask to the other server, if any server can't afford the request we send it to the failed requests stack. But if one server can afford it we assign the request to the server, this is the moment where the tick starts. The servers have the ram list, and the processing queue, when the processing list is empty (talking about the elements of a specific request) we operate the ram, and send it to succesfull requests stack. This is the moment where the actual tick ends.
-### BASIC ALGORITHM
-1. Read Input & queue requests into Requests Queue
-2. Start Tick
-3. Load Balancer takes three requests from requests queue
-4. Load Balancer comunicates with servers
-5. Servers work (they perform as many operations as they can in a tick)
-6. Tick Ends. Go back to step 2 if there are still requests wating on requests queue OR 
-   there's still a server working.
-7. Display totals.
 
 ## What is considered **ONE** operation?
 - Every rotation of **Hard Disc**. (rotating from 1 to 4 or any other number is an operation)
