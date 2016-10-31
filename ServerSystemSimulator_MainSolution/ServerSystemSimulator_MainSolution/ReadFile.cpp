@@ -14,7 +14,7 @@ CReadFile::~CReadFile()
 
 void CReadFile::ReadInput(string Entrada, int ServersProccessingInfo[3], int ServersRamInfo[3], int ServersOperationsPerTickInfo[3], CRequestQueue * requestQueue)
 {
-	file.open(Entrada, ios::in);
+	file.open(Entrada);
 	string p = "";
 	int serverCount = 0;
 	int line = 0;

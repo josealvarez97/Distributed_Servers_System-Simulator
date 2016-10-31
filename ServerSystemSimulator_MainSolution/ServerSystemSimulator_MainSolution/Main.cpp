@@ -17,17 +17,21 @@ int main()
 	int ServersProcessingInfo[3];
 	int ServersRamInfo[3];
 	int ServersOperationsPerTickInfo[3];
+	string Entrada;
+
 
 	CRequestQueue* requestsQueue = new CRequestQueue(); //Tendra en su metodo addRequest(string info, string info..que leeremos en LeerArchivoDeTexto)
 														// NO TIENEN METODOS LAS SIGUIENTES DOS, SOLO ESTAN DECLARADAS. OSCAR TE TOCA :(
 	CRequestStack* failedRequestsStack = new CRequestStack();
 	CRequestStack* succesfullRequestsStack = new CRequestStack();
 
-
+	cout << "-------------------------------ESCRIBA LA DIRECCION DEL ARCHIVO PARA REALIZAR LA SIMULACION--------------------------------" << endl;
+	getline(cin, Entrada);
+	cout << endl << endl << endl;
 
 	//Leer entrada y Meter Requests en CR
 	CReadFile* objReadFile = new CReadFile();
-	objReadFile->ReadInput("Entrada.txt", ServersProcessingInfo, ServersRamInfo, ServersOperationsPerTickInfo, requestsQueue);
+	objReadFile->ReadInput(Entrada, ServersProcessingInfo, ServersRamInfo, ServersOperationsPerTickInfo, requestsQueue);
 
 
 	//Inicializar Objetos
