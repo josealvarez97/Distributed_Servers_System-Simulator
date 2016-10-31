@@ -12,6 +12,10 @@ CLoadBalancer::CLoadBalancer(CServer* server1, CServer* server2, CServer* server
 	this->currentSecondRequest = nullptr;
 	this->currentThirdRequest = nullptr;
 
+
+	this->serverRankingArray[0] = server1;
+	this->serverRankingArray[1] = server2;
+	this->serverRankingArray[2] = server3;
 	this->lastServerAssignation = 0;
 }
 
@@ -65,26 +69,30 @@ bool CLoadBalancer::TryToAssignRequestToAServer(CRequest* request)
 {
 	bool succesfullAssignation = false;
 
+	// serverRanking means how fucked up is a server
+
+	SetServersCurrentRank();
+
 	if (request != nullptr)
-		if (this->server1->AskAvailability(request->GetProcessingNumbers().length(), request->GetRamNumbers().length()) == true
-			&& succesfullAssignation != true && this->server1->IsWorking() == false)
+		if (this->serverRankingArray[0]/*least Ranked (best condition)*/->AskAvailability(request->GetProcessingNumbers().length(), request->GetRamNumbers().length()) == true
+			&& succesfullAssignation != true)
 		{
-			this->server1->ReceiveRequest(request);
-			this->lastServerAssignation = 1;
+			this->serverRankingArray[0]->ReceiveRequest(request);
+			this->lastServerAssignation = serverRankingArray[0]->GetServerID();
 			succesfullAssignation = true;
 		}
-		else if (this->server2->AskAvailability(request->GetProcessingNumbers().length(), request->GetRamNumbers().length()) == true
-			&& succesfullAssignation != true && this->server2->IsWorking() == false )
+		else if (this->serverRankingArray[1]/*middle Ranked*/->AskAvailability(request->GetProcessingNumbers().length(), request->GetRamNumbers().length()) == true
+			&& succesfullAssignation != true)
 		{
-			this->server2->ReceiveRequest(request);
-			this->lastServerAssignation = 2;
+			this->serverRankingArray[1]->ReceiveRequest(request);
+			this->lastServerAssignation = serverRankingArray[1]->GetServerID();
 			succesfullAssignation = true;
 		}
-		else if (this->server3->AskAvailability(request->GetProcessingNumbers().length(), request->GetRamNumbers().length()) == true
-			&& succesfullAssignation != true && this->server3->IsWorking() == false)
+		else if (this->serverRankingArray[2]/*higher Ranked (worst condition)*/->AskAvailability(request->GetProcessingNumbers().length(), request->GetRamNumbers().length()) == true
+			&& succesfullAssignation != true)
 		{
-			this->server3->ReceiveRequest(request);
-			this->lastServerAssignation = 3;
+			this->serverRankingArray[2]->ReceiveRequest(request);
+			this->lastServerAssignation = serverRankingArray[2]->GetServerID();
 			succesfullAssignation = true;
 		}
 
@@ -96,4 +104,31 @@ bool CLoadBalancer::TryToAssignRequestToAServer(CRequest* request)
 int CLoadBalancer::GetlastServerAssignation()
 {
 	return this->lastServerAssignation;
+}
+
+void CLoadBalancer::SetServersCurrentRank()
+{
+
+
+
+
+	int n = 2;
+
+
+	for (int j = 0; j < n; j++)
+	{
+		for (int i = 0; i < n; i++)
+		{
+			// 0 position is least, 3 is most
+			if (this->serverRankingArray[i]->GetServerRank() >= this->serverRankingArray[i + 1]->GetServerRank())
+			{
+				swap(this->serverRankingArray[i], this->serverRankingArray[i + 1]);
+				//swapped = true;
+			}
+
+		}
+	}
+
+
+
 }

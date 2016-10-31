@@ -6,6 +6,9 @@ class CLoadBalancer
 private:
 	CRequest *currentFirstRequest, *currentSecondRequest, *currentThirdRequest;
 	CServer *server1, *server2, *server3;
+
+
+	CServer *serverRankingArray[3];	// serverRanking means how fucked up a server is
 	int lastServerAssignation;
 
 public:
@@ -21,5 +24,6 @@ public:
 	CRequest* GetCurrentThirdRequest();
 	bool TryToAssignRequestToAServer(CRequest* request);
 	int GetlastServerAssignation();
+	void SetServersCurrentRank();
 };
 
