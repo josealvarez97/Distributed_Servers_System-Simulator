@@ -71,7 +71,7 @@ bool CLoadBalancer::TryToAssignRequestToAServer(CRequest* request)
 
 	// serverRanking means how fucked up is a server
 
-	SetServersCurrentRank();
+	SetServersCurrentRank(); // Reset the ranking. Check out "Optimizations" in readme
 
 	if (request != nullptr)
 		if (this->serverRankingArray[0]/*least Ranked (best condition)*/->AskAvailability(request->GetProcessingNumbers().length(), request->GetRamNumbers().length()) == true
@@ -108,12 +108,8 @@ int CLoadBalancer::GetlastServerAssignation()
 
 void CLoadBalancer::SetServersCurrentRank()
 {
-
-
-
-
+	// Sort of current server ranking
 	int n = 2;
-
 
 	for (int j = 0; j < n; j++)
 	{
@@ -123,7 +119,6 @@ void CLoadBalancer::SetServersCurrentRank()
 			if (this->serverRankingArray[i]->GetServerRank() >= this->serverRankingArray[i + 1]->GetServerRank())
 			{
 				swap(this->serverRankingArray[i], this->serverRankingArray[i + 1]);
-				//swapped = true;
 			}
 
 		}
