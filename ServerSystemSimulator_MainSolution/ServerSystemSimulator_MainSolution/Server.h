@@ -17,6 +17,7 @@ private: //Attributes
 	int CurrentRequestRAMNumbers;
 	int CurrentRequestProcessingNumbersLeft;
 	CHardDisk* hardDisk;
+	int serverID;
 
 private: //Methods
 	int RamFreeSpace();
@@ -24,7 +25,7 @@ private: //Methods
 	void OperateRam(int currentRequestRamNumbers, typeOfOperation type);
 
 public:
-	CServer(int processingSize, int ramSize, int operationsPerTick, CRequestStack* succesfullRequestsStack, CHardDisk* hardDisk);
+	CServer(int processingSize, int ramSize, int operationsPerTick, CRequestStack* succesfullRequestsStack, CHardDisk* hardDisk, int ID);
 	~CServer();
 
 	void Work();
@@ -34,6 +35,9 @@ public:
 	void PrintQueueState();
 	void PrintServerInfo();
 	bool IsWorking();
+
+	int GetServerRank();
+	int GetServerID() { return this->serverID; }
 
 
 };

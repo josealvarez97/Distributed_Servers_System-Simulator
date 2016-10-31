@@ -78,7 +78,7 @@ void CServer::OperateRam(int currentRequestRamNumbers, typeOfOperation type)
 	}
 }
 
-CServer::CServer(int processingSize, int ramSize, int operationsPerTick, CRequestStack * succesfullRequestsStack, CHardDisk* hardDisk)
+CServer::CServer(int processingSize, int ramSize, int operationsPerTick, CRequestStack * succesfullRequestsStack, CHardDisk* hardDisk, int ID)
 {
 	this->serverProcessingQueue.SetMAX_SIZE(processingSize);
 	this->serverRAM.SetMAX_SIZE(ramSize);
@@ -92,6 +92,7 @@ CServer::CServer(int processingSize, int ramSize, int operationsPerTick, CReques
 	this->serverRequestsQueue = new CRequestQueue();
 
 	this->hardDisk = hardDisk;
+	this->serverID = ID;
 }
 
 CServer::~CServer()
@@ -240,4 +241,28 @@ bool CServer::IsWorking()
 		return true;
 	else
 		return false;
+}
+
+int CServer::GetServerRank()
+{
+
+		int degreeServer;
+
+		if (this->serverRequestsQueue->Size() != 0)
+			degreeServer = this->serverRequestsQueue->Size();
+		else
+			degreeServer = 0;
+
+		CRequestQueue aCopyOfServerRequestsQueue = *this->serverRequestsQueue;
+		int weightOfRequests = 0;
+		for (int i = aCopyOfServerRequestsQueue.Size(); i > 0; i--)
+		{
+			weightOfRequests += aCopyOfServerRequestsQueue.ReturnHead()->GetProcessingNumbers().length() + aCopyOfServerRequestsQueue.ReturnHead()->GetRamNumbers().length();
+			aCopyOfServerRequestsQueue.Dequeue();
+		}
+
+		int serverRank = (degreeServer * weightOfRequests) / operationsPerTick;
+		return serverRank;
+
+	
 }
