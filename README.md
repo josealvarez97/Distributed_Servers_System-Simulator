@@ -1,26 +1,47 @@
 # Servers System Simulator
 This project is about simulating a distributed servers system. The idea behind this systems is to attend as many requests as quickly as possible with the available computational resources.
 
+## (INSTRUCTIONS FOR RUNNING THE PROGRAM)
+The program will ask you to write the path of the text file containing the input. Then you put on your seat belt and enjoy the simulation.
+
+## BASIC STRUCTURE
+### Principal Classes 
+#### Server
+##### Atributtes
+- CRequestQueue ProcessingQueue
+- CList Ram
+- int OperationsPerTick
+
+##### Methods
+- void Work(): This methods does as many operations per tick as possible.
+- bool AskAvailability(int processingSpaceNecessary, int ramSpaceNecessary): This function receives the parameters
+  of a request and return if it is possible for the server to attend the request.
+
+#### LoadBalancer
+##### Atributtes
+- CurrentFirstRequest
+- CurrentSecondRequest
+- CurrentThirdRequest
+
+##### Methods
+- void TakeRequestFromRequestQueue(CRequest request)
+- CRequest GetCurrentFirstRequest()
+- CRequest GetCurrentSecondRequest()
+- CRequest GetCurrentThirdRequest()
+- bool TryToAssignRequestToAServer(): this methods asks servers if it is possible
+  to assign a request. If no server can take the request, loadBalancer sends it to
+  failedRequestsStack.
+
+
+## HOW DOES THE SIMULATION WORKS?
+First of all we send all the requests from the file to the request queue, after that the load balancer takes the first tree requests of the queue, this is the part where the load balancer has to comunicate with each server to know if they can afford one request, if the actual server can't we ask to the other server, if any server can't afford the request we send it to the failed requests stack. But if one server can afford it we assign the request to the server, this is the moment where the tick starts. And the tick ends when all the servers do the operations that they can in one tick. The servers have the ram list, and the processing queue, when the processing list is empty (talking about the elements of a specific request) we operate the ram, and send it to succesfull requests stack.
+
 
 ## What is considered **ONE** operation?
 - Every rotation of **Hard Disc**. (rotating from 1 to 4 or any other number is an operation)
 - Consuming an element from the **Processing Queue**.
-- Pushing a request to the **Succesful Requests Queue**.
 - Reorganize / Reordering the **RAM**.
 - Executing a **Complete Request** (example, making everything neccesary to sum SUM, multiply in MUL, divide in DIV)
-
-
-References:
-
-1. [Doubly Linked Lists. Concept and Examples](http://es.ccm.net/faq/2872-listas-doblemente-enlazadas)
-2. [How to make a doubly linked list in c++ p.1 (video)](https://www.youtube.com/watch?v=YJRRpXYldVQ)
-3. [How to make a doubly linked list in c++ p.2 (video)](https://www.youtube.com/watch?v=5s0x8bc9DvQ)
-4. [Basic functions of doubly linked lists. (English)](https://www.tutorialspoint.com/data_structures_algorithms/doubly_linked_list_algorithm.htm)
-5. [Doubly linked list. Concept and fuctions in Spanish](http://c.conclase.net/edd/?cap=005)
-6. [Doubly linked list. Concept and fuctions in Spanish](http://c.conclase.net/edd/?cap=005)
-
-## HOW DOES THE SIMULATION WORKS?
-First of all we send all the requests from the file to the request queue, after that the load balancer takes the first tree requests of the queue, this is the part where the load balancer has to comunicate with each server to know if they can afford one request, if the actual server can't we ask to the other server, if any server can't afford the request we send it to the failed requests stack. But if one server
 
 
 ## OPTIMIZATIONS / EXTRAS
@@ -39,3 +60,13 @@ where:
 
 In summary, it is based on the fact that how "fucked up" is a server is directly proportional to how complex are the tasks assigned, and inversely proportional to the capacity/power of the server.
 
+
+
+References:
+
+1. [Doubly Linked Lists. Concept and Examples](http://es.ccm.net/faq/2872-listas-doblemente-enlazadas)
+2. [How to make a doubly linked list in c++ p.1 (video)](https://www.youtube.com/watch?v=YJRRpXYldVQ)
+3. [How to make a doubly linked list in c++ p.2 (video)](https://www.youtube.com/watch?v=5s0x8bc9DvQ)
+4. [Basic functions of doubly linked lists. (English)](https://www.tutorialspoint.com/data_structures_algorithms/doubly_linked_list_algorithm.htm)
+5. [Doubly linked list. Concept and fuctions in Spanish](http://c.conclase.net/edd/?cap=005)
+6. [Doubly linked list. Concept and fuctions in Spanish](http://c.conclase.net/edd/?cap=005)
