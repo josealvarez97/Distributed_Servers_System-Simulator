@@ -11,6 +11,8 @@ CLoadBalancer::CLoadBalancer(CServer* server1, CServer* server2, CServer* server
 	this->currentFirstRequest = nullptr;
 	this->currentSecondRequest = nullptr;
 	this->currentThirdRequest = nullptr;
+
+	this->lastServerAssignation = 0;
 }
 
 
@@ -65,25 +67,33 @@ bool CLoadBalancer::TryToAssignRequestToAServer(CRequest* request)
 
 	if (request != nullptr)
 		if (this->server1->AskAvailability(request->GetProcessingNumbers().length(), request->GetRamNumbers().length()) == true
-			&& succesfullAssignation != true)
+			&& succesfullAssignation != true && this->server1->IsWorking() == false)
 		{
 			this->server1->ReceiveRequest(request);
+			this->lastServerAssignation = 1;
 			succesfullAssignation = true;
 		}
 		else if (this->server2->AskAvailability(request->GetProcessingNumbers().length(), request->GetRamNumbers().length()) == true
-			&& succesfullAssignation != true)
+			&& succesfullAssignation != true && this->server2->IsWorking() == false )
 		{
 			this->server2->ReceiveRequest(request);
+			this->lastServerAssignation = 2;
 			succesfullAssignation = true;
 		}
 		else if (this->server3->AskAvailability(request->GetProcessingNumbers().length(), request->GetRamNumbers().length()) == true
-			&& succesfullAssignation != true)
+			&& succesfullAssignation != true && this->server3->IsWorking() == false)
 		{
 			this->server3->ReceiveRequest(request);
+			this->lastServerAssignation = 3;
 			succesfullAssignation = true;
 		}
 
 
 
 	return succesfullAssignation;
+}
+
+int CLoadBalancer::GetlastServerAssignation()
+{
+	return this->lastServerAssignation;
 }

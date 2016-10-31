@@ -104,3 +104,29 @@ string CRequest::GetType_str()
 	}
 }
 
+int CRequest::GetRequiredDiskPosition()
+{
+	switch (this->operationType)
+	{
+	case MUL:
+		return 1;
+		break;
+	case SUM:
+		return 3;
+		break;
+	case SUB:
+		return 5;
+		break;
+	case DIV:
+		return 4;
+		break;
+	case NEG:
+		return 2;
+		break;
+	default:
+		return -1;
+		break;
+
+	}
+}
+

@@ -6,6 +6,7 @@ class CLoadBalancer
 private:
 	CRequest *currentFirstRequest, *currentSecondRequest, *currentThirdRequest;
 	CServer *server1, *server2, *server3;
+	int lastServerAssignation;
 
 public:
 
@@ -19,5 +20,6 @@ public:
 	CRequest* GetCurrentSecondRequest();
 	CRequest* GetCurrentThirdRequest();
 	bool TryToAssignRequestToAServer(CRequest* request);
+	int GetlastServerAssignation();
 };
 
