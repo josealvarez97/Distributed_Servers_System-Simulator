@@ -65,7 +65,6 @@ CRequest* CRequestQueue::Dequeue()
 		this->head = this->head->getNext();
 		this->head->setPrevious(nullptr);
 		counter--;
-
 		return Temp;
 	}
 	else if (counter == 1)

@@ -44,8 +44,8 @@ void CServer::OperateRam(int currentRequestRamNumbers, typeOfOperation type)
 		Entrada: string ... 123456
 		Algoritmo de lectura añade a ram leyendo string de izquierda a derecha
 		/RAM HEAD/-----/ELEMENT 1/---....---/ELEMENT n - 1/---------/RAM TAIL/
-		1              2                 5                       6      
-		
+		1              2                 5                       6
+
 
 		*/
 
@@ -78,7 +78,7 @@ void CServer::OperateRam(int currentRequestRamNumbers, typeOfOperation type)
 	}
 }
 
-CServer::CServer(int processingSize, int ramSize, int operationsPerTick, CRequestStack * succesfullRequestsStack)
+CServer::CServer(int processingSize, int ramSize, int operationsPerTick, CRequestStack * succesfullRequestsStack, CHardDisk* hardDisk)
 {
 	this->serverProcessingQueue.SetMAX_SIZE(processingSize);
 	this->serverRAM.SetMAX_SIZE(ramSize);
@@ -86,10 +86,12 @@ CServer::CServer(int processingSize, int ramSize, int operationsPerTick, CReques
 	this->sucessfullRequestsStack = succesfullRequestsStack;
 
 	// -1 means value out of context. we don't have a logical value to assign.
-	this->CurrentRequestRAMNumbers = -1; 
+	this->CurrentRequestRAMNumbers = -1;
 	this->CurrentRequestProcessingNumbersLeft = -1;
 
 	this->serverRequestsQueue = new CRequestQueue();
+
+	this->hardDisk = hardDisk;
 }
 
 CServer::~CServer()
@@ -100,7 +102,7 @@ void CServer::Work()
 {
 	// Necesitamos algoritmos y formas de guardar la informacion de las peticioenes...
 	int operations = 0;
-	while(operations < this->operationsPerTick && this->serverRequestsQueue->Size() != 0)
+	while (operations < this->operationsPerTick && this->serverRequestsQueue->Size() != 0)
 	{
 
 		// EVALUAR SI CONTADORES ESTAN FUERA DE CONTEXTO (Esto se daría cuando tengamos que trabajar un request "inicial" o que no tenga un request completado una operacion/instante antes)
@@ -141,22 +143,32 @@ void CServer::Work()
 		else // TENEMOS UNA REQUEST EN PROCESO, EL CUAL HAY QUE CONTINUAR...
 		{
 
-			//EXECUTE  1 operation
+			//EXECUTE  1 operation / o MOVEMOS EL DISCO DURO (1 o mas operaciones)
 
-			// O SACAMOS UN ELEMENTO DE PROCESAMIENTO
+			// O SACAMOS UN ELEMENTO DE PROCESAMIENTO (1 operacion)
 			if (this->CurrentRequestProcessingNumbersLeft != 0)
 			{
 				this->serverProcessingQueue.Dequeue();
 				this->CurrentRequestProcessingNumbersLeft--;
+
+				operations++; // AUMENTAMOS EL CONTADOR DE OPERACIONES
+
 			}
-			// O OPERAMOS LA RAM
+			// O PREPARAMOS EL DISCO DURO (1 o más operaciones)
+			else if (this->serverRequestsQueue->ReturnHead()->GetRequiredDiskPosition() != hardDisk->GetDiskPosition())
+			{
+				// RotateDisk(int targetPosition, int allowedOperations) returns the number of operations performed while rotating the disk. (it cannot rotate more times than whatthe server can in one tick).
+				operations += this->hardDisk->RotateDisk(this->serverRequestsQueue->ReturnHead()->GetRequiredDiskPosition(), (this->operationsPerTick - operations));
+			}
+			// O OPERAMOS LA RAM (1 operaciones)
 			else
 			{
 				// Operamos la ram... metodo void OperarRam(tipo de Operacion, etc)
 				OperateRam(CurrentRequestRAMNumbers, this->serverRequestsQueue->ReturnHead()->GetTypeOfOperation());
 				this->serverRequestsQueue->ReturnHead()->SetComplete(true);
+
+				operations++; // AUMENTAMOS EL CONTADOR DE OPERACIONES
 			}
-			operations++; // AUMENTAMOS EL CONTADOR DE OPERACIONES
 
 		}
 
@@ -194,9 +206,38 @@ void CServer::ReceiveRequest(CRequest *request)
 		// EnQueue request to Server Request Queue
 		this->serverRequestsQueue->Queue(request);
 	}
-	
 
 
 
 
+
+}
+
+void CServer::PrintQueueState()
+{
+	CRequestQueue aCopy = *this->serverRequestsQueue;
+
+	if (aCopy.Size() > 0)
+		for (int i = aCopy.Size(); i > 0; i--)
+		{
+			cout << " * [" << "ID:" << aCopy.ReturnHead()->GetIdentifier() << " (" << aCopy.ReturnHead()->GetType_str().c_str() << ") ]" << endl;
+			aCopy.Dequeue();
+		}
+	else
+		cout << "El servidor no tiene peticiones asignadas" << endl;
+
+
+}
+
+void CServer::PrintServerInfo()
+{
+	cout << "(Espacio Libre Ram:" << RamFreeSpace() << " - Procesamiento:" << ProcessingQueueFreeSpace() << ")" << endl;
+}
+
+bool CServer::IsWorking()
+{
+	if (this->serverRequestsQueue->Size() > 0)
+		return true;
+	else
+		return false;
 }

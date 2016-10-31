@@ -29,5 +29,6 @@ public:
 	void SetResult(int number);
 	void SetComplete(bool value);
 	string GetType_str();
+	int GetRequiredDiskPosition();
 };
 

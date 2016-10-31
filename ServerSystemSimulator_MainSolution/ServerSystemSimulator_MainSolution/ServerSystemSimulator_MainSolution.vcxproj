@@ -114,6 +114,7 @@
     <ClCompile Include="DNode.cpp" />
     <ClCompile Include="DoubleLinkedList.cpp" />
     <ClCompile Include="DoubleLinkedQueue.cpp" />
+    <ClCompile Include="HardDisk.cpp" />
     <ClCompile Include="LoadBalancer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="NodeRequest.cpp" />
@@ -121,6 +122,7 @@
     <ClCompile Include="Request.cpp" />
     <ClCompile Include="RequestQueue.cpp" />
     <ClCompile Include="RequestStack.cpp" />
+    <ClCompile Include="RoundQueue.cpp" />
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="Stack.cpp" />
   </ItemGroup>
@@ -129,12 +131,14 @@
     <ClInclude Include="DNode.h" />
     <ClInclude Include="DoubleLinkedList.h" />
     <ClInclude Include="DoubleLinkedQueue.h" />
+    <ClInclude Include="HardDisk.h" />
     <ClInclude Include="LoadBalancer.h" />
     <ClInclude Include="NodeRequest.h" />
     <ClInclude Include="ReadFile.h" />
     <ClInclude Include="Request.h" />
     <ClInclude Include="RequestQueue.h" />
     <ClInclude Include="RequestStack.h" />
+    <ClInclude Include="RoundQueue.h" />
     <ClInclude Include="Server.h" />
     <ClInclude Include="Stack.h" />
   </ItemGroup>
